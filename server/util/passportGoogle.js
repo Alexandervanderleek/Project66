@@ -3,6 +3,7 @@ const {GOOGLE_SECRET, GOOGLE_ID, GOOGLE_REDIRECT} = require('../config/config')
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20')
 const {InternalError, UserError} = require('./customErrors');
+const {redisStore} =  require('./session')
 
 passport.use(
     new GoogleStrategy({
@@ -11,7 +12,8 @@ passport.use(
         callbackURL: GOOGLE_REDIRECT,
         scope: ['profile','email'],
         state: true,
-    },  async function (accessToken,refreshToken, profile, cb){
+        passReqToCallback: true,
+    },  async function (req, accessToken,refreshToken, profile, cb){
        
         const {id, displayName, emails, photos} = profile;
 
@@ -52,10 +54,11 @@ passport.use(
 );
 
 //Serialize the user item
-passport.serializeUser((user, cb) => {
+//called before session created, and defines what goes in the cookie
+passport.serializeUser((req, user, cb) => {
     try{        
         process.nextTick(()=>{
-            cb(null, user.googleId);
+            cb(null, user);
         })
     }catch(err){
         new InternalError("Serialization failed");
@@ -63,8 +66,12 @@ passport.serializeUser((user, cb) => {
 })
 
 //deserialize [only done once for session]
-passport.deserializeUser(async (id, cb) => {
+//called subsequent requests get information out of cookie
+passport.deserializeUser(async (req, id, cb) => {
 
+    console.log(id )
+    console.log(await redisStore.ids())
+    console.log(req.session)
     if(id) {
         try{
             const user = await User.findOne({googleId: id});

@@ -5,4 +5,11 @@ server/node_modules
 pids
 *.pid
 *.seed
+server/.env
+server/node_modules
+
+# Runtime data
+pids
+*.pid
+*.seed
 *.pid.lock

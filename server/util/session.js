@@ -9,15 +9,17 @@ redisClient.connect().catch((err)=>console.log("something went wrong"))
 
 //Create the redis store that uses express session, 1 day default ttl
 
-let redisStore = new RedisStore({
+const redisStore = new RedisStore({
     client: redisClient,
     prefix: '66',
     ttl: 24 * 60 * 60 * 1000
-})
+});
+
+
 
 //export resulting session from express-session
 
-module.exports = session({
+const sesh = session({
    store: redisStore,
    resave: false,
    saveUninitialized: false,
@@ -29,3 +31,5 @@ module.exports = session({
     maxAge: 24 * 60 * 60 * 1000
    }
  });
+
+ module.exports = {sesh, redisStore}

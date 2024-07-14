@@ -1,6 +1,6 @@
 require('./database/db')();
 const {PORT} = require('./config/config')
-const session =  require('./util/session');
+const {sesh} =  require('./util/session');
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
@@ -23,7 +23,7 @@ app.use(express.urlencoded({
 app.use(cors());
 
 //use session
-app.use(session);
+app.use(sesh);
 
 //using passport initialize, and using sesion middleware
 app.use(passport.initialize());
@@ -33,12 +33,11 @@ app.get('/login/google', passport.authenticate("google"));
 
 app.get('/oauth2/redirect/google',passport.authenticate("google",{
     successReturnToOrRedirect: '/login/sucess',
-    failureRedirect: '/login/fail'
-
+    failureRedirect: '/login/fail',
 }))
 
 app.get('/login/sucess',(req,res)=>{
-    res.json({"sucess":req.isAuthenticated()});
+    res.json({"sucess":"sup"});
 })
 
 app.get('/login/fail',(req,res)=>{
