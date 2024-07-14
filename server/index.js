@@ -4,7 +4,9 @@ const session =  require('./util/session');
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
+require('express-async-errors')
 require('./util/passportGoogle');
+const {errorHandler, unknownEndpoint} = require('./middleware/errorHandler');
 
 
 const app = express();
@@ -27,7 +29,7 @@ app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/login/google',passport.authenticate("google"));
+app.get('/login/google', passport.authenticate("google"));
 
 app.get('/oauth2/redirect/google',passport.authenticate("google",{
     successReturnToOrRedirect: '/login/sucess',
@@ -47,6 +49,10 @@ app.get('/test',(req,res)=>{
     res.json({"msg":req.isAuthenticated()});
 })
 
+
+app.use(errorHandler);
+
+app.use(unknownEndpoint);
 
 //start listening
 app.listen(PORT, ()=>{

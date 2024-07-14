@@ -1,7 +1,7 @@
 const session = require('express-session');
 const redisClient = require('../database/redis');
 const { default: RedisStore } = require('connect-redis');
-const {REDIS_SECRET} = require('../config/config')
+const {REDIS_SECRET, NODE_ENV} = require('../config/config')
 
 //Connect the redis client
 
@@ -11,7 +11,8 @@ redisClient.connect().catch((err)=>console.log("something went wrong"))
 
 let redisStore = new RedisStore({
     client: redisClient,
-    prefix: '66'
+    prefix: '66',
+    ttl: 24 * 60 * 60 * 1000
 })
 
 //export resulting session from express-session
@@ -20,5 +21,11 @@ module.exports = session({
    store: redisStore,
    resave: false,
    saveUninitialized: false,
-   secret: REDIS_SECRET
+   secret: REDIS_SECRET,
+   rolling: true,
+   cookie: {
+    secure: NODE_ENV === 'production',
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000
+   }
  });

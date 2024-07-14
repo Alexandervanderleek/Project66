@@ -2,6 +2,7 @@ const  { User }  = require('../models/User');
 const {GOOGLE_SECRET, GOOGLE_ID, GOOGLE_REDIRECT} = require('../config/config')
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20')
+const {InternalError, UserError} = require('./customErrors');
 
 passport.use(
     new GoogleStrategy({
@@ -11,11 +12,6 @@ passport.use(
         scope: ['profile','email'],
         state: true,
     },  async function (accessToken,refreshToken, profile, cb){
-
-        console.log(accessToken)
-        console.log(refreshToken)
-
-        console.log(profile);
        
         const {id, displayName, emails, photos} = profile;
 
@@ -33,8 +29,6 @@ passport.use(
 
                 if(!user){
                     
-                    console.log("need a new user")
-
                     const createdUser = new User({
                         name: fullName,
                         email: email,
@@ -46,47 +40,30 @@ passport.use(
                     
                     return cb(null, newUser);
                 }else{
-
-                    console.log("have a user")
-
                     return cb(null, user);
                 }
-
            }catch(err){
-
-                console.log(err)
-
-                return cb(new Error("Could Not Create Account", null));
+                return cb(new InternalError("Couldn't create the account"));
            }
         }else{
-            return cb(new Error("Email is not verified",null));
+            return cb(new UserError("Email is not verified"));
         }
     })
 );
 
 //Serialize the user item
 passport.serializeUser((user, cb) => {
-    
-    try{
-        console.log("serealize");
-
-        console.log(user)
-        
+    try{        
         process.nextTick(()=>{
             cb(null, user.googleId);
         })
     }catch(err){
-        console.log(err)
-        new Error("What")
+        new InternalError("Serialization failed");
     }
-    
 })
 
-//deserialize
+//deserialize [only done once for session]
 passport.deserializeUser(async (id, cb) => {
-
-    console.log("deserelize")
-
 
     if(id) {
         try{
@@ -95,13 +72,13 @@ passport.deserializeUser(async (id, cb) => {
             if(user){
                 return cb(null, user);
             }else{
-                return cb(new Error("could not find user"), null);
+                return cb(new UserError("Could Not Find User"), null);
             }
 
         } catch (error){
-            return cb(new Error(error.message), null);
+            return cb(new InternalError("Something went wrong deserialize"), null);
         }
     }else{
-        return cb(new Error("No ID found"), null)
+        return cb(new UserError("Invalid Cookie"), null)
     }
 })

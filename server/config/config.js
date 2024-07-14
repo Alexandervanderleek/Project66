@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 //Just a simple config file
-
+const NODE_ENV = process.env.NODE_ENV
 const MONGO_URI = process.env.MONGO_URI
 const REDIS_HOST = process.env.REDIS_HOST
 const REDIS_PORT = process.env.REDIS_PORT
