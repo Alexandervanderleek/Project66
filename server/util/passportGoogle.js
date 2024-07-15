@@ -3,7 +3,6 @@ const {GOOGLE_SECRET, GOOGLE_ID, GOOGLE_REDIRECT} = require('../config/config')
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20')
 const {InternalError, UserError} = require('./customErrors');
-const {redisStore} =  require('./session')
 
 passport.use(
     new GoogleStrategy({
