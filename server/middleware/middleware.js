@@ -1,3 +1,5 @@
+const { UserError } = require("../util/customErrors");
+
 const unknownEndpoint = (req, res) => {
     res.status(404).send({error: 'unknown endpoint'})
 }
@@ -16,4 +18,14 @@ const errorHandler = (error, req, res, next) => {
     next(error);
 }
 
-module.exports = {errorHandler, unknownEndpoint}
+const isAuth = (req,res,next) => {
+    if(req.isAuthenticated()){
+        next();
+    }
+    else{
+       throw new UserError("Not Authenticated")
+        
+    }
+}
+
+module.exports = {errorHandler, unknownEndpoint, isAuth}

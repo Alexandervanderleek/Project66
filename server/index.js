@@ -2,14 +2,19 @@ require('./database/db')();
 const {PORT} = require('./config/config')
 const {sesh} =  require('./util/session');
 const express = require('express');
+const axios = require('axios');
 const cors = require('cors');
 const passport = require('passport');
 require('express-async-errors')
 require('./util/passportGoogle');
-const {errorHandler, unknownEndpoint} = require('./middleware/errorHandler');
-
+const middleware = require('./middleware/middleware');
+const authRouter = require('./routes/authRoutes');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
+
+//just cors
+app.use(cors());
 
 //parse json
 app.use(express.json());
@@ -19,9 +24,6 @@ app.use(express.urlencoded({
     extended: false
 }));
 
-//just cors
-app.use(cors());
-
 //use session
 app.use(sesh);
 
@@ -29,29 +31,15 @@ app.use(sesh);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/login/google', passport.authenticate("google"));
+app.use('/oauth2', authRouter);
 
-app.get('/oauth2/redirect/google',passport.authenticate("google",{
-    successReturnToOrRedirect: '/login/sucess',
-    failureRedirect: '/login/fail',
-}))
+app.use('/user',middleware.isAuth, userRouter)
 
-app.get('/login/sucess',(req,res)=>{
-    res.json({"sucess":"sup"});
-})
+//Handle errors
+app.use(middleware.errorHandler);
 
-app.get('/login/fail',(req,res)=>{
-    res.json({"bad":"somethings"})
-})
-
-app.get('/test',(req,res)=>{
-    res.json({"msg":req.isAuthenticated()});
-})
-
-
-app.use(errorHandler);
-
-app.use(unknownEndpoint);
+//Handle unknown request
+app.use(middleware.unknownEndpoint);
 
 //start listening
 app.listen(PORT, ()=>{

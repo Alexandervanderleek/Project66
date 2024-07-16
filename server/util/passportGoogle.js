@@ -3,6 +3,7 @@ const {GOOGLE_SECRET, GOOGLE_ID, GOOGLE_REDIRECT} = require('../config/config')
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20')
 const {InternalError, UserError} = require('./customErrors');
+const {redisStore} = require('./session')
 
 passport.use(
     new GoogleStrategy({
@@ -25,7 +26,7 @@ passport.use(
            try{
 
                 let user = await User.findOne({
-                    googleId: id
+                    email: email
                 });
 
                 if(!user){
@@ -33,15 +34,16 @@ passport.use(
                     const createdUser = new User({
                         name: fullName,
                         email: email,
-                        googleId: id,
                         picture: profilePic
                     });
                     
                     const newUser = await createdUser.save();
                     
-                    return cb(null, newUser);
+
+
+                    return cb(null, newUser.toJSON());
                 }else{
-                    return cb(null, user);
+                    return cb(null, user.toJSON());
                 }
            }catch(err){
                 return cb(new InternalError("Couldn't create the account"));
@@ -53,7 +55,7 @@ passport.use(
 );
 
 //Serialize the user item
-//called before session created, and defines what goes in the cookie
+//called before session created, and defines what goes in the session
 passport.serializeUser((req, user, cb) => {
     try{        
         process.nextTick(()=>{
@@ -65,22 +67,11 @@ passport.serializeUser((req, user, cb) => {
 })
 
 //deserialize [only done once for session]
-//called subsequent requests get information out of cookie
-passport.deserializeUser(async (req, id, cb) => {
-
-    console.log(id )
-    console.log(await redisStore.ids())
-    console.log(req.session)
-    if(id) {
+//called subsequent requests get information out of session w/id done for us
+passport.deserializeUser(async (req, user, cb) => { 
+    if(user) {
         try{
-            const user = await User.findOne({googleId: id});
-
-            if(user){
-                return cb(null, user);
-            }else{
-                return cb(new UserError("Could Not Find User"), null);
-            }
-
+            return cb(null, user);
         } catch (error){
             return cb(new InternalError("Something went wrong deserialize"), null);
         }
