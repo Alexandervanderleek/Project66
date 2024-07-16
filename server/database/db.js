@@ -1,5 +1,7 @@
 const {MONGO_URI} = require('../config/config')
 const mongoose = require("mongoose")
+require('../models/habbit');
+require('../models/User');
 
 //Export function that connects to the MONGODB database
 //Nothing special
