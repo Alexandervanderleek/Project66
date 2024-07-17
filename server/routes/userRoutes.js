@@ -3,7 +3,8 @@ const userController = require('../controller/user');
 
 userRouter.get('/', userController.getUser);
 
-userRouter.get('/notes', userController.getUserNotes);
+userRouter.get('/habbits', userController.getUserHabbits);
+
 
 
 

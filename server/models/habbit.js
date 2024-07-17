@@ -22,11 +22,17 @@ const habbitSchema = new mongoose.Schema({
     },
     start:{
         type: Date,
-        required: [true, 'Need start time']
+        required: [true, 'Need start time'],
     },
     expire:{
         type: Date,
-        required: [true, 'Need expire time']
+        required: [true, 'Need expire time'],
+        validate:{
+            validator: function(value){
+                return value > this.start;
+            },
+            message: 'Invalid time data'
+        }
     },
     user:{
         type: mongoose.Schema.Types.ObjectId,
@@ -38,7 +44,7 @@ const habbitSchema = new mongoose.Schema({
 });
 
 
-habbitSchema.virtual('today').get(()=>{
+habbitSchema.virtual('today').get(function(){
 
     const myDate = new Date();
 
@@ -53,6 +59,17 @@ habbitSchema.virtual('status').get(()=>{
         return 'complete'
     }
     return 'progress'
+});
+
+
+
+habbitSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+        returnedObject.id = returnedObject._id.toString()
+        delete returnedObject._id
+        delete returnedObject.__v
+        delete returnedObject.user
+    }
 })
 
 

@@ -16,7 +16,7 @@ exports.getUser = (req, res) => {
 }
 
 //Get all the users notes
-exports.getUserNotes = async (req, res) => {
+exports.getUserHabbits = async (req, res) => {
     
     const notes = await User.findById(req.session.passport.user.id).populate('habbits', {select: '-_id -__v'}).catch((err)=>{
         new InternalError('Error getting user notes');
