@@ -5,10 +5,14 @@ const unknownEndpoint = (req, res) => {
 }
 
 const errorHandler = (error, req, res, next) => {
+
    
-    if(error.name === "SERVER"){
+    if(error.name === "INTERNAL"){
         console.error(error.message);
+                
         return res.status(500).json({error:"Internal Server Error"});
+
+
 
     } else if (error.name === "USER"){
         return res.status(400).json({error: error.message});
