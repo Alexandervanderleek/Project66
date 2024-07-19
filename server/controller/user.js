@@ -26,3 +26,4 @@ exports.getUserHabbits = async (req, res) => {
         notes: notes.habbits
     })
 }
+

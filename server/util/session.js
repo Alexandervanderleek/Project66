@@ -28,8 +28,10 @@ const sesh = session({
    rolling: true,
    cookie: {
     secure: NODE_ENV === 'production',
+    sameSite: 'lax',
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000
+    maxAge: 24 * 60 * 60 * 1000,
+    domain: 'localhost'
    }
  });
 

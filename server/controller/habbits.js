@@ -46,3 +46,15 @@ exports.updateHabbit = async (req, res) => {
     }
 }
 
+exports.deleteHabbit = async (req, res) => {
+    try{
+
+        await Habbit.findByIdAndDelete(req.params.id);
+
+        res.sendStatus(200);
+
+    }catch(err){
+        throw new InternalError("failed to delete habbit "+err);
+    }
+}
+

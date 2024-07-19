@@ -15,7 +15,10 @@ const habbitRouter = require('./routes/habbitRoutes');
 const app = express();
 
 //just cors
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 
 //parse json
 app.use(express.json());

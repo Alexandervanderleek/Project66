@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 
 const Home = () => {
@@ -18,23 +18,117 @@ const Home = () => {
     
     setInterval(()=>{
       
-      if(popup.window.location.href.includes('home')){popup.close()}
+      if(popup.window.location.href.includes('redirect')){popup.close()}
       if(!popup || popup.closed) return;
       clearInterval();
       
-    },1000)
+    },500)
 
   }
   
+
+  useEffect(()=>{
+    console.log(document.cookie);
+  },[])
+
+
   return (
     <div>
       Welcome Home
 
-      <button onClick={handleLogin}>
-        <div className='bg-red-300'>
+      <div className=''>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel ipsum est ad incidunt dicta ullam eveniet, qui saepe eaque eum nam, doloribus, quisquam quos numquam earum! Dignissimos optio ducimus ut.
+
+        </div>
+
+      <div className='bg-red-300 h-full'>
           Login With Google
         </div>
-      </button>
 
     </div>
   )
