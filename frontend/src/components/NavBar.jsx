@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { debounce } from 'lodash' 
+import { useDispatch, useSelector } from 'react-redux'
+import { createUser } from '../reducers/userReducer'
+
+
 function NavBar() {
 
-    const [isScrolled, setIsScrolled] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const dispath = useDispatch();
+
+    const user = useSelector(({user}) => {
+        return user
+    });
+
+    console.log(user)
+
 
     const handleLogin = () => {        
         const popup =  window.open('http://localhost:3000/oauth2/login/google',"popup",`width=500,height=600`)
@@ -24,7 +37,7 @@ function NavBar() {
     const getAuthUser = () => {
         console.log("auth user")
         axios.get('/api/user',{withCredentials: true}).then((res)=>{
-            console.log(res.data);
+            dispath(createUser(res.data))
         }).catch((error) => {
             console.error("Error fetching user data:", error);
         });
@@ -46,7 +59,16 @@ function NavBar() {
         <div className={`navbar bg-base-100 sticky top-0 z-10 justify-center ${isScrolled?'border-b-black border-b-2':''}`}>
             <div className="flex-1 max-w-4xl justify-between my-2 mx-auto">
                 <h3>Project 66</h3>
-                <button onClick={handleLogin} className="btn btn-neutral">Login</button>
+                <div>
+                    {user ? (
+                        <>
+                        <p>Welcome back {user.name}</p>
+                        <button onClick={console.log("logout")} className="btn btn-neutral">Logout</button>
+                        </>
+                    ): (
+                        <button onClick={handleLogin} className="btn btn-neutral">Login</button>
+                    )}
+                </div>
             </div>        
         </div>
   )
