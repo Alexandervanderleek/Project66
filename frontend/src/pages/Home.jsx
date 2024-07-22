@@ -1,54 +1,55 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import NewHabbitModal from '../components/NewHabbitModal'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Habbit from '../components/Habbit'
+import { addHabbit, setHabbits} from '../reducers/habbitsReducer'
+
 
 const Home = () => {
   
-  console.log("reload")
+  const dispath = useDispatch();
 
   const user = useSelector(({user}) => {
     return user
   });
 
-  const [habbits, setHabbits] = useState(null);
+  const habbits = useSelector(({habbits})=>{
+    return habbits
+  })
 
+  //function creating a new habbit
   const createNewHabbit = (values) => {
     
+    //start (when created) and end of current day
     const start = new Date();
     const end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 23, 59, 59, 999);
     
-    console.log(values)
-
-    axios.post('/api/habbits/new',{
+    const newHabbit = {
       title: values.habbitName,
       description: values.habbitDescription,
       icon: values.emoji,
       Days: 0,
       start: start,
       expire: end,
-    }).then((res)=>{
-      console.log("sucess")
+      today: true,
+      status: 'active'
+    }
+
+    axios.post('/api/habbits/new',newHabbit).then((res)=>{
+
+      //console.log(res.data.createdHabbit)
+
+      dispath(addHabbit(res.data.createdHabbit));
     }).catch((err)=>{
       console.log("error")
     })
-
-
-    console.log(start.toISOString())
-    console.log(start)
-    console.log(end.toISOString())
-    console.log(end)
   } 
 
   useEffect(()=>{
     if(user){
-      console.log(user)
       axios.get('/api/user/habbits',{withCredentials: true}).then((res)=>{
-        
-        setHabbits(res.data.habbits)
-        console.log(res.data.habbits)
-
+        dispath(setHabbits(res.data.habbits))
       }).catch((err)=>{
         console.log(err)
       })
@@ -72,8 +73,6 @@ const Home = () => {
               <Habbit 
                 key={habbit.id} 
                 habbit={habbit} 
-                onDelete={()=>{console.log("del")}}
-                onComplete={()=>{console.log("complete")}}
               />
             ))}
 
@@ -81,7 +80,7 @@ const Home = () => {
         ) : (
           <div className='text-center'>
             <p className='text-gray-500 text-lg'>
-              Add A new habbit 
+              Add a new habbit 
             </p>
           </div>
         )}

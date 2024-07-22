@@ -19,14 +19,12 @@ function NewHabbitModal({createNewHabbit}) {
 
     const modalRef = useRef(null);
 
-
     const [showEmojis, setShowEmojis] = useState(false);
 
 
     const handleSubmit = (values, {setSubmitting }) => {
         setTimeout(() => {
             createNewHabbit(values);
-         console.log(modalRef.current)
          modalRef.current.close()
          setSubmitting(false);
         }, 500);
@@ -108,10 +106,13 @@ function NewHabbitModal({createNewHabbit}) {
                                 errors.emoji ? 'input-error' : 'border-gray-300'
                             }`} 
                             /> 
-                            <button onClick={()=>{setShowEmojis(!showEmojis)}} className="btn btn-neutral flex-0" type="button">Choose </button>        
+                            <button onClick={()=>{
+                              setShowEmojis(!showEmojis)
+                  
+                              }} className="btn btn-neutral flex-0" type="button">Choose </button>        
                         </div>
                          
-                        <EmojiPicker open={showEmojis} onEmojiClick={(emojiObject) => {
+                        <EmojiPicker emojiStyle='native' open={showEmojis} onEmojiClick={(emojiObject) => {
                                         setFieldValue('emoji', emojiObject.emoji);
                                         setShowEmojis(false);
                                     }}></EmojiPicker>

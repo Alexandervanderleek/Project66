@@ -1,11 +1,10 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
+//Page for redirecting user after login
 function Redirect() {
   
   const params = useParams();
-
-  console.log(params)
 
   return (
     <div>

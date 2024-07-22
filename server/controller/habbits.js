@@ -22,7 +22,7 @@ exports.newHabbit = async (req, res) => {
 
         await User.updateOne({ _id: id }, { $push: { habbits: createdHabbit._id } });
 
-        res.sendStatus(200);
+        res.status(200).json({createdHabbit});
     
     }catch(err){
          throw new InternalError("Could not create Habbit "+ err)
@@ -34,12 +34,12 @@ exports.updateHabbit = async (req, res) => {
     try{
         const oldHabbit = await Habbit.findById(req.params.id);
 
-        await Habbit.findByIdAndUpdate(req.params.id,{
+        const updatedHabbit = await Habbit.findByIdAndUpdate(req.params.id,{
             start: oldHabbit.expire,
             expire: new Date(oldHabbit.expire.getTime() + 24 * 60 * 60 * 1000)
         })
 
-        res.sendStatus(200);
+        res.status(200).json({updatedHabbit});
 
     }catch(err){
         throw new InternalError("failed to update habbit "+err)
@@ -50,7 +50,9 @@ exports.updateHabbit = async (req, res) => {
 //deltete a habbit
 exports.deleteHabbit = async (req, res) => {
     try{
-        await Habbit.findByIdAndDelete(req.params.id);
+       const response = await Habbit.findByIdAndDelete(req.params.id);
+        
+        await User.updateOne({ _id: response.user }, { $pull: { habbits: response._id } });
 
         res.sendStatus(200);
 
