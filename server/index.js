@@ -2,7 +2,6 @@ require('./database/db')();
 const {PORT} = require('./config/config')
 const {sesh} =  require('./util/session');
 const express = require('express');
-const axios = require('axios');
 const cors = require('cors');
 const passport = require('passport');
 require('express-async-errors')
@@ -35,6 +34,7 @@ app.use(sesh);
 app.use(passport.initialize());
 app.use(passport.session());
 
+//auth routes
 app.use('/oauth2', authRouter);
 
 //api user routes

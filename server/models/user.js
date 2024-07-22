@@ -15,6 +15,7 @@ const UserSchema = new Schema({
     picture:{
         type: String
     },
+    //array of reference to habbits
     habbits: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -25,6 +26,7 @@ const UserSchema = new Schema({
     timestamps: true
 });
 
+//How toJson for user db object
 UserSchema.set('toJSON', {
     transform: (document, returnedObject ) => {
         returnedObject.id = returnedObject._id.toString()
@@ -32,6 +34,5 @@ UserSchema.set('toJSON', {
         delete returnedObject.__v
     }
 })
-
 
 exports.User = mongoose.model("User", UserSchema);

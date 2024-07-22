@@ -15,15 +15,18 @@ exports.getUser = (req, res) => {
     res.status(200).json({user:returnedUserObject});
 }
 
-//Get all the users notes
+//Get all the users habbits
 exports.getUserHabbits = async (req, res) => {
     
-    const notes = await User.findById(req.session.passport.user.id).populate('habbits', {select: '-_id -__v'}).catch((err)=>{
-        new InternalError('Error getting user notes');
+    const habbits = await User.findById(req.session.passport.user.id).populate({
+        path: 'habbits',
+        options: {virtuals: true}
+    }).catch((err)=>{
+        new InternalError('Error getting user habbits');
     })
 
     res.status(200).json({
-        notes: notes.habbits
+        habbits: habbits.habbits
     })
 }
 

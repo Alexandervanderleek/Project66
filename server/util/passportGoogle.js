@@ -3,7 +3,6 @@ const {GOOGLE_SECRET, GOOGLE_ID, GOOGLE_REDIRECT} = require('../config/config')
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20')
 const {InternalError, UserError} = require('./customErrors');
-const {redisStore} = require('./session')
 
 passport.use(
     new GoogleStrategy({
@@ -22,15 +21,12 @@ passport.use(
         const fullName = displayName;
         const profilePic = photos[0].value;
 
+        //ensure email verififed
         if(emailVerified){
            try{
-
-                let user = await User.findOne({
-                    email: email
-                });
+                let user = await User.findOne({email: email});
 
                 if(!user){
-                    
                     const createdUser = new User({
                         name: fullName,
                         email: email,
@@ -39,8 +35,6 @@ passport.use(
                     
                     const newUser = await createdUser.save();
                     
-
-
                     return cb(null, newUser.toJSON());
                 }else{
                     return cb(null, user.toJSON());

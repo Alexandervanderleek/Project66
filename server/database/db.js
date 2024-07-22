@@ -14,6 +14,9 @@ module.exports = () => {
         console.log("Error connecting to Mongo -",err)
     });
 
+    mongoose.set("toJSON",{virtuals: true})
+    mongoose.set("toObject",{virtuals: true})
+
     mongoose.connection.on("disconnected", ()=>{
         console.log("Default conntection disconnected mongoose")
     })
