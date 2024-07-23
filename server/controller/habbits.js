@@ -33,10 +33,14 @@ exports.newHabbit = async (req, res) => {
 exports.updateHabbit = async (req, res) => {
     try{
         const oldHabbit = await Habbit.findById(req.params.id);
+        const newDays = oldHabbit.Days+1
 
-        const updatedHabbit = await Habbit.findByIdAndUpdate(req.params.id,{
+        const updatedHabbit = await Habbit.findByIdAndUpdate(req.params.id, {
             start: oldHabbit.expire,
-            expire: new Date(oldHabbit.expire.getTime() + 24 * 60 * 60 * 1000)
+            expire: new Date(oldHabbit.expire.getTime() + 24 * 60 * 60 * 1000),
+            Days: newDays
+        },{
+            new: true
         })
 
         res.status(200).json({updatedHabbit});

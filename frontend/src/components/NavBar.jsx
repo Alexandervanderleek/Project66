@@ -100,7 +100,7 @@ function NavBar() {
             {/* if a user exists load avatar otherwise sign in/ sign out  */}
             {user ? (
                 <>
-                    <div className="avatar dropdown">
+                    <div className="avatar dropdown dropdown-left">
                         <div 
                             className="w-12 rounded-full cursor-pointer" 
                             role="button" 

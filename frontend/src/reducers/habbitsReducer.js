@@ -17,16 +17,21 @@ const habbitSlice = createSlice({
 
             const id = action.payload
 
-            
-
             const newState = state.filter((habbit)=> habbit.id !== id);
 
             return newState;
+        },
+        updatedHabbit(state, action){
+            const newHabbit = action.payload;
+
+            const habbitsToStay = state.map((habbit)=> habbit.id != newHabbit.id ? habbit : newHabbit );
+
+            return habbitsToStay
         }
     }
 
 });
 
-export const {setHabbits, addHabbit, clearHabbits, deleteHabbit} = habbitSlice.actions
+export const {setHabbits, addHabbit, clearHabbits, deleteHabbit, updatedHabbit} = habbitSlice.actions
 
 export default habbitSlice.reducer

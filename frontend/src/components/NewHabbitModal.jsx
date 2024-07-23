@@ -22,11 +22,12 @@ function NewHabbitModal({createNewHabbit}) {
     const [showEmojis, setShowEmojis] = useState(false);
 
 
-    const handleSubmit = (values, {setSubmitting }) => {
+    const handleSubmit = (values, {setSubmitting, resetForm }) => {
         setTimeout(() => {
-            createNewHabbit(values);
-         modalRef.current.close()
-         setSubmitting(false);
+          createNewHabbit(values);
+          modalRef.current.close()
+          setSubmitting(false);
+          resetForm();
         }, 500);
     }
 
@@ -47,7 +48,7 @@ function NewHabbitModal({createNewHabbit}) {
                 onSubmit={handleSubmit}
             >
                 {({isSubmitting, errors, handleSubmit, setFieldValue}) => (
-                    <form onSubmit={handleSubmit} className="space-y-2">
+                    <form autoComplete='off' onSubmit={handleSubmit} className="space-y-2">
                     <div>
                       <h3 className="text-lg font-semibold mb-2">Habit Name:</h3>
                       <label 
