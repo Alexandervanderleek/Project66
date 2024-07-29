@@ -1,31 +1,48 @@
 const Habbit = require('../models/habbit');
 const {User} = require('../models/User');
-const { InternalError } = require('../util/customErrors');
+const { InternalError, UserError } = require('../util/customErrors');
 
 //Create a new habbit for a authenticated user
-exports.newHabbit = async (req, res) => {
+exports.newHabbit = async (req, res,next) => {
     try{
         const id = req.session.passport.user.id;
         const {title, description, icon, start, expire} = req.body;
 
-        const newHabbit = new Habbit({
-            title: title,
-            description: description,
-            icon: icon,
-            Days: 0,
-            start: start,
-            expire: expire,
+
+        Habbit.countDocuments({
             user: id
-        });
+        }).then(async (count)=>{
+            
+            
+            if(count>=8){
+                throw new UserError("Too many active habbits")
+            }
+    
+            const newHabbit = new Habbit({
+                title: title,
+                description: description,
+                icon: icon,
+                Days: 0,
+                start: start,
+                expire: expire,
+                user: id
+            });
+    
+            const createdHabbit = await newHabbit.save();
+    
+            await User.updateOne({ _id: id }, { $push: { habbits:  createdHabbit._id } });
+    
+            res.status(200).json({createdHabbit});
+    
+        }).catch((err)=>{
+            next(err)
+        })
 
-        const createdHabbit = await newHabbit.save();
-
-        await User.updateOne({ _id: id }, { $push: { habbits: createdHabbit._id } });
-
-        res.status(200).json({createdHabbit});
+    
     
     }catch(err){
-         throw new InternalError("Could not create Habbit "+ err)
+         //throw new InternalError("Could not create Habbit "+ err)
+        next(err)
     }
 }
 
@@ -46,7 +63,7 @@ exports.updateHabbit = async (req, res) => {
         res.status(200).json({updatedHabbit});
 
     }catch(err){
-        throw new InternalError("failed to update habbit "+err)
+        next(new InternalError("failed to update habbit "+err))
 
     }
 }
@@ -61,7 +78,7 @@ exports.deleteHabbit = async (req, res) => {
         res.sendStatus(200);
 
     }catch(err){
-        throw new InternalError("failed to delete habbit "+err);
+         next(new InternalError("failed to delete habbit "+err));
     }
 }
 

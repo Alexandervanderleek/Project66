@@ -65,20 +65,20 @@ function NavBar() {
     useEffect(() => {
         
         //function for checking if window in scrolled state
-        const handleScroll = debounce(() => {
-            isScrolled = (window.scrollY > 0);
+        // const handleScroll = debounce(() => {
+        //     isScrolled = (window.scrollY > 0);
             
-            if(isScrolled){
-                scrollDiv.current.classList.add('border-b-black');
-                scrollDiv.current.classList.add('border-b-2');
-            }else{
-                scrollDiv.current.classList.remove('border-b-black');
-                scrollDiv.current.classList.remove('border-b-2');
-            }
+        //     if(isScrolled){
+        //         scrollDiv.current.classList.add('border-b-black');
+        //         scrollDiv.current.classList.add('border-b-2');
+        //     }else{
+        //         scrollDiv.current.classList.remove('border-b-black');
+        //         scrollDiv.current.classList.remove('border-b-2');
+        //     }
 
-        }, 5) 
+        // }, 5) 
 
-        window.addEventListener('scroll', handleScroll)
+        //window.addEventListener('scroll', handleScroll)
 
         //attempt a auto login
         if(!user){
@@ -86,12 +86,12 @@ function NavBar() {
 
         }
 
-        return () => {window.removeEventListener('scroll', handleScroll)}
+        //return () => {window.removeEventListener('scroll', handleScroll)}
     }, [])
 
 
   return (
-    <div ref={scrollDiv} className={`navbar bg-base-100 sticky top-0 z-10 justify-center`}>
+    <div ref={scrollDiv} className={`navbar bg-gray-100 border-b-gray-100 border-b-2 sticky top-0 z-10 justify-center`}>
         {/* justify between with a max width */}
         <div className="flex-1 max-w-4xl justify-between my-2 mx-8">
             <div>

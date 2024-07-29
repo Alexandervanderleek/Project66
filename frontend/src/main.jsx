@@ -6,12 +6,14 @@ import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './reducers/userReducer.js'
 import habbitsReducer from './reducers/habbitsReducer.js'
+import toastReducer from './reducers/toastReducer.js'
 
 //configure our store
 const store = configureStore({
   reducer: {
     user: userReducer,
-    habbits: habbitsReducer
+    habbits: habbitsReducer,
+    toast: toastReducer
   },
 })
 

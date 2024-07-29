@@ -68,7 +68,7 @@ habbitSchema.virtual('status').get(function (){
     if(new Date() > this.expire){
         return 'failed';
     }
-    if(this.days === 66){
+    if(this.Days === 66){
         return 'complete'
     }
     return 'active'

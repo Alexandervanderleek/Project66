@@ -4,12 +4,14 @@ import NotFound from '../pages/NotFound'
 import Home from '../pages/Home'
 import NavBar from '../components/NavBar'
 import Redirect from '../pages/Redirect'
+import Toast from '../components/Toast'
 
 //NavbarLayout
 const NavLayout = ({children}) => {
   return (
     <>
       <NavBar></NavBar>
+      <Toast></Toast>
       {children} 
     </>
   )

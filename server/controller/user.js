@@ -18,15 +18,46 @@ exports.getUser = (req, res) => {
 //Get all the users habbits
 exports.getUserHabbits = async (req, res) => {
     
+    const now = new Date();
+
     const habbits = await User.findById(req.session.passport.user.id).populate({
         path: 'habbits',
-        options: {virtuals: true}
+        match: {
+            expire: {$gte: now },
+            Days: {$lt: 66}
+        },
+        options: {
+            limit: 10,
+            sort:{
+                start: -1
+            }
+        }
     }).catch((err)=>{
         new InternalError('Error getting user habbits');
     })
 
+    const completeFailedhabbits = await User.findById(req.session.passport.user.id).populate({
+        path: 'habbits',
+        match: {
+            $or: [
+                {Days:{$eq:66}},
+                {expire:{$lte:now}},
+            ]
+        },
+        options: {
+            limit: 10,
+            sort:{
+                start: -1
+            }
+            
+        }
+    }).catch((err)=>{
+        new InternalError('Error getting user habbits');
+    })
+
+
     res.status(200).json({
-        habbits: habbits.habbits
+        habbits: habbits.habbits.concat(completeFailedhabbits.habbits)
     })
 }
 

@@ -9,3 +9,12 @@
 [create special auth middleware for mobile to pull session data ]
 
 check jwt -> get id -> get user session info
+
+
+
+
+[TO DO]
+
+add global toast error
+
+limit the creation frontend and backend

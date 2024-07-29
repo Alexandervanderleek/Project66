@@ -6,9 +6,9 @@ const unknownEndpoint = (req, res) => {
 
 //error handler middleware
 const errorHandler = (error, req, res, next) => {
+
     //if we have a internal error
     if(error.name === "INTERNAL"){
-        console.error(error.message);
         return res.status(500).json({error:"Internal Server Error"});
         //if we have a user error
     } else if (error.name === "USER"){
@@ -17,7 +17,6 @@ const errorHandler = (error, req, res, next) => {
         }
         return res.status(400).json({error: error.message});
     }
-    next(error);
 }
 
 //check for session that isAuthenticated

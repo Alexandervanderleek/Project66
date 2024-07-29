@@ -4,10 +4,11 @@ import NewHabbitModal from '../components/NewHabbitModal'
 import { useDispatch, useSelector } from 'react-redux'
 import Habbit from '../components/Habbit'
 import { addHabbit, setHabbits} from '../reducers/habbitsReducer'
+import { showToast } from '../reducers/toastReducer'
 
 
 const Home = () => {
-  
+
   const dispath = useDispatch();
 
   const user = useSelector(({user}) => {
@@ -18,13 +19,15 @@ const Home = () => {
     return habbits
   })
 
+  console.log(habbits)
+
   //function creating a new habbit
   const createNewHabbit = (values) => {
-    
+
     //start (when created) and end of current day
     const start = new Date();
     const end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 23, 59, 59, 999);
-    
+
     const newHabbit = {
       title: values.habbitName,
       description: values.habbitDescription,
@@ -38,13 +41,17 @@ const Home = () => {
 
     axios.post('/api/habbits/new',newHabbit).then((res)=>{
 
-      //console.log(res.data.createdHabbit)
+      console.log(res.data.createdHabbit)
 
       dispath(addHabbit(res.data.createdHabbit));
     }).catch((err)=>{
-      console.log("error")
+
+      dispath(showToast({
+        message: 'Too many active habbits',
+        type: 'error'
+      })) 
     })
-  } 
+  }
 
   useEffect(()=>{
     if(user){
@@ -65,27 +72,81 @@ const Home = () => {
         <NewHabbitModal createNewHabbit={createNewHabbit} />
       </div>
 
-      <div className='bg-gray-200 rounded-md flex-grow flex items-center justify-center min-h-[200px]'>
-        {habbits && habbits.length > 0 ? (
+      <div role="tablist" className="tabs tabs-lifted tabs-lg">
+        <input type="radio" defaultChecked name="my_tabs_2" role="tab" className="tab [--tab-bg:#e5e7eb]" aria-label="To do" />
+        <div role="tabpanel" className="tab-content bg-gray-200 rounded-md">
+        <div className='flex justify-center flex-grow items-center min-h-[200px]'>
+        {habbits && habbits.filter(habbit => habbit.status === 'active' && habbit.today === true).length > 0 ? (
           <div className='flex flex-col my-4 w-full md:w-3/4 mx-2'>
-            {/* Render your habbits here */}
-            {habbits.map((habbit, index) => (
-              <Habbit 
-                key={habbit.id} 
-                habbit={habbit} 
+            {habbits.filter((habbit) => habbit.status === 'active' && habbit.today === true).map((habbit, index) => (
+              <Habbit
+                key={habbit.id}
+                habbit={habbit}
                 index={index}
               />
             ))}
-
           </div>
         ) : (
           <div className='text-center'>
             <p className='text-gray-500 text-lg'>
-              Add a new habbit 
+              Add a new habit
             </p>
           </div>
         )}
+        </div>
+        </div>
+
+        <input type="radio" name="my_tabs_2" role="tab" className="tab [--tab-bg:#e5e7eb]" aria-label="Done" />
+        <div role="tabpanel" className="tab-content bg-gray-200 rounded-md">
+        <div className='flex justify-center flex-grow items-center min-h-[200px]'>
+        {habbits && habbits.filter(habbit => habbit.status === 'active' && habbit.today === false).length > 0 ? (
+          <div className='flex flex-col my-4 w-full md:w-3/4 mx-2'>
+            {habbits.filter((habbit) => habbit.status === 'active' && habbit.today === false).map((habbit, index) => (
+              <Habbit
+                key={habbit.id}
+                habbit={habbit}
+                index={index}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className='text-center'>
+            <p className='text-gray-500 text-lg'>
+              No completed habits for today
+            </p>
+          </div>
+        )}
+        </div>
+        </div>
+
+        <input type="radio" name="my_tabs_2" role="tab" className="tab [--tab-bg:#e5e7eb]" aria-label="Failed & Completed" />
+        <div role="tabpanel" className="tab-content bg-gray-200 rounded-md">
+        <div className='flex justify-center flex-grow items-center min-h-[200px]'>
+        {habbits && habbits.filter(habbit => habbit.status !== 'active').length > 0 ? (
+            <div className='flex flex-col my-4 w-full md:w-3/4 mx-2'>
+              <h1 className='font-semibold m-2 text-lg'>Last 10:</h1>
+              {habbits.filter((habbit) => habbit.status !== 'active').map((habbit, index) => (
+                <Habbit
+                  key={habbit.id}
+                  habbit={habbit}
+                  index={index}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className='text-center'>
+              <p className='text-gray-500 text-lg'>
+                No recently failed or completed habits
+              </p>
+            </div>
+          )}
+        </div>
+        </div>
+
+
       </div>
+
+
     </div>
   </div>
   )

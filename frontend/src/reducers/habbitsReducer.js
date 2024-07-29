@@ -8,7 +8,7 @@ const habbitSlice = createSlice({
             return action.payload;
         },
         addHabbit(state, action){
-            state.push(action.payload)
+            state.unshift(action.payload)
         },
         clearHabbits(state, action){
             return []
@@ -28,10 +28,23 @@ const habbitSlice = createSlice({
 
             return habbitsToStay
         }
+
+        ,
+        failedHabbit(state, action){
+            let failed = action.payload;
+
+            console.log(failed.id)
+
+            const habbitsToStay = state.map((habbit)=> habbit.id !== failed.id ? habbit : {status:'failed',...failed} );
+
+            console.log(habbitsToStay)
+
+            return habbitsToStay
+        }
     }
 
 });
 
-export const {setHabbits, addHabbit, clearHabbits, deleteHabbit, updatedHabbit} = habbitSlice.actions
+export const {setHabbits, addHabbit, clearHabbits, deleteHabbit, updatedHabbit, failedHabbit} = habbitSlice.actions
 
 export default habbitSlice.reducer
