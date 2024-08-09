@@ -65,11 +65,11 @@ habbitSchema.virtual('today').get(function(){
 //days==66 complete
 //otherwise it is active
 habbitSchema.virtual('status').get(function (){
-    if(new Date() > this.expire){
-        return 'failed';
-    }
     if(this.Days === 66){
         return 'complete'
+    }
+    if(new Date() > this.expire){
+        return 'failed';
     }
     return 'active'
 });

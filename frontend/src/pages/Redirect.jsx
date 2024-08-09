@@ -6,6 +6,8 @@ function Redirect() {
   
   const params = useParams();
 
+  window.close();
+
   return (
     <div>
       {params.id === "1" && (

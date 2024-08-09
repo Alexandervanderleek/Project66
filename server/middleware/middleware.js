@@ -13,7 +13,8 @@ const errorHandler = (error, req, res, next) => {
         //if we have a user error
     } else if (error.name === "USER"){
         if (error.message === "AUTH"){
-            return res.status(204);
+            console.log("auth")
+            return res.status(200).json({error: error.message});
         }
         return res.status(400).json({error: error.message});
     }
@@ -21,6 +22,7 @@ const errorHandler = (error, req, res, next) => {
 
 //check for session that isAuthenticated
 const isAuth = (req,res,next) => {
+    console.log("is auth")
     if(req.isAuthenticated()){
         next();
     }

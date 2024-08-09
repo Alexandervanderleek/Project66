@@ -4,6 +4,8 @@ const { InternalError } = require('../util/customErrors');
 //Get user information for current session
 exports.getUser = (req, res) => {
 
+    console.log("getting user")
+
     if(!req.session.passport.user){new InternalError('Something went wrong with user req')}
 
     const returnedUserObject = {
@@ -60,4 +62,40 @@ exports.getUserHabbits = async (req, res) => {
         habbits: habbits.habbits.concat(completeFailedhabbits.habbits)
     })
 }
+
+
+
+//Get all the users habbits
+exports.getAllUserHabbits = async (req, res) => {
+    
+    const now = new Date();
+
+    console.log("get all")
+
+    const completeFailedhabbits = await User.findById(req.session.passport.user.id).populate({
+        path: 'habbits',
+        match: {
+            $or: [
+                {Days:{$eq:66}},
+                {expire:{$lte:now}},
+            ]
+        },
+        options: {
+            sort:{
+                start: -1
+            }
+        }
+    }).catch((err)=>{
+        console.log(err)
+        new InternalError('Error getting user habbits');
+    })
+
+
+    
+
+    res.status(200).json({
+        habbits: completeFailedhabbits.habbits
+    })
+}
+
 

@@ -7,6 +7,9 @@ userRouter.get('/', userController.getUser);
 //get the user habbits
 userRouter.get('/habbits', userController.getUserHabbits);
 
+//get the user habbits
+userRouter.get('/stats', userController.getAllUserHabbits);
+
 //logout a user i.e destroy our session
 userRouter.get('/logout', (req, res) => {
     try{

@@ -50,7 +50,12 @@ function Habbit({ habbit, index }) {
         habbitRef.current.classList.add('animate-delete');
         setTimeout(()=>{dispath(deleteHabbit(habbit.id))},500) 
       })
-      .catch(err => console.error('Error deleting habbit:', err));
+      .catch(err => {
+        dispath(showToast({
+          message: err.message,
+          type: 'error'
+        }));
+      });
   };
 
   const handleComplete = () => {
@@ -62,7 +67,10 @@ function Habbit({ habbit, index }) {
           setTimeout(()=>{dispath(updatedHabbit(res.data.updatedHabbit))},500) 
         
         })
-      .catch(err => console.error('Error completing habbit:', err));
+      .catch(err => {dispath(showToast({
+        message: err.message,
+        type: 'error'
+      }));});
   };
 
   const statusColors = {
@@ -112,8 +120,27 @@ function Habbit({ habbit, index }) {
                 </div>
             )}
           <div>
-            <p className="text-sm text-gray-500">Days</p>
-            <p className="font-semibold"><span className={((!habbit.today && habbit.status !=='failed') || habbit.status==='complete') ? 'text-green-500' : 'text-red-500'}>{habbit.Days}/66</span></p>
+            {(habbit.status==='active' && habbit.today === false)?(
+               <div className='flex flex-row space-x-2 text-center'>
+               
+                <div>
+                  <p className="text-sm text-gray-500">completed</p>
+                  <p className="font-semibold"><span className={'text-green-500' }>{habbit.Days}</span></p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-500">remaining</p>
+                  <p className="font-semibold"><span className={'text-red-500' }>{66-habbit.Days}</span></p>
+                </div>
+               
+               </div>
+               
+            ):(
+              <>
+              <p className="text-sm text-gray-500">Days</p>
+              <p className="font-semibold"><span className={((!habbit.today && habbit.status !=='failed') || habbit.status==='complete') ? 'text-green-500' : 'text-red-500'}>{habbit.Days}/66</span></p>
+              </>
+            )}
           </div>
         </div>
         <div className="flex space-x-2">

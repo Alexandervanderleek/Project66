@@ -41,24 +41,27 @@ const Home = () => {
 
     axios.post('/api/habbits/new',newHabbit).then((res)=>{
 
-      console.log(res.data.createdHabbit)
-
       dispath(addHabbit(res.data.createdHabbit));
+    
     }).catch((err)=>{
-
+      
       dispath(showToast({
-        message: 'Too many active habbits',
+        message: err.message,
         type: 'error'
-      })) 
+      })); 
+    
     })
   }
 
   useEffect(()=>{
-    if(user){
+    if(user && !habbits){
       axios.get('/api/user/habbits',{withCredentials: true}).then((res)=>{
         dispath(setHabbits(res.data.habbits))
       }).catch((err)=>{
-        console.log(err)
+        dispath(showToast({
+          message: err.message,
+          type: 'error'
+        }));
       })
     }
   },[user])
@@ -73,7 +76,7 @@ const Home = () => {
       </div>
 
       <div role="tablist" className="tabs tabs-lifted tabs-lg">
-        <input type="radio" defaultChecked name="my_tabs_2" role="tab" className="tab [--tab-bg:#e5e7eb]" aria-label="To do" />
+        <input type="radio" defaultChecked name="my_tabs_2" role="tab" className="font-semibold tab [--tab-bg:#e5e7eb]" aria-label="To do" />
         <div role="tabpanel" className="tab-content bg-gray-200 rounded-md">
         <div className='flex justify-center flex-grow items-center min-h-[200px]'>
         {habbits && habbits.filter(habbit => habbit.status === 'active' && habbit.today === true).length > 0 ? (
@@ -96,7 +99,7 @@ const Home = () => {
         </div>
         </div>
 
-        <input type="radio" name="my_tabs_2" role="tab" className="tab [--tab-bg:#e5e7eb]" aria-label="Done" />
+        <input type="radio" name="my_tabs_2" role="tab" className="font-semibold tab [--tab-bg:#e5e7eb]" aria-label="Done Today" />
         <div role="tabpanel" className="tab-content bg-gray-200 rounded-md">
         <div className='flex justify-center flex-grow items-center min-h-[200px]'>
         {habbits && habbits.filter(habbit => habbit.status === 'active' && habbit.today === false).length > 0 ? (
@@ -119,12 +122,12 @@ const Home = () => {
         </div>
         </div>
 
-        <input type="radio" name="my_tabs_2" role="tab" className="tab [--tab-bg:#e5e7eb]" aria-label="Failed & Completed" />
+        <input type="radio" name="my_tabs_2" role="tab" className="font-semibold tab [--tab-bg:#e5e7eb]" aria-label="Failed & Completed" />
         <div role="tabpanel" className="tab-content bg-gray-200 rounded-md">
         <div className='flex justify-center flex-grow items-center min-h-[200px]'>
         {habbits && habbits.filter(habbit => habbit.status !== 'active').length > 0 ? (
             <div className='flex flex-col my-4 w-full md:w-3/4 mx-2'>
-              <h1 className='font-semibold m-2 text-lg'>Last 10:</h1>
+              <h1 className='font-semibold m-2 text-lg'>Recent Activity:</h1>
               {habbits.filter((habbit) => habbit.status !== 'active').map((habbit, index) => (
                 <Habbit
                   key={habbit.id}
