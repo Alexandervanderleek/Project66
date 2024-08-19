@@ -21,12 +21,9 @@ function NewHabbitModal({ createNewHabbit }) {
     habbitDescription: "",
     emoji: "😄",
   };
-
   const modalRef = useRef(null);
-
   const dispath = useDispatch();
-  const habbits = useSelector((state)=>state.habbits)
-
+  const habbits = useSelector((state) => state.habbits);
   const [showEmojis, setShowEmojis] = useState(false);
 
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
@@ -39,25 +36,21 @@ function NewHabbitModal({ createNewHabbit }) {
   };
 
   const newHabbitOpen = () => {
-    //() => 
-    
-    if(habbits?.filter((habbit)=>habbit.status==='active').length >=8){  
-      dispath(showToast({
-        message: 'Too many active habbits',
-        type: 'error'
-      }))
-    }else{
-      console.log("else")
-      document.getElementById("my_modal_5").showModal()
+    if (habbits?.filter((habbit) => habbit.status === "active").length >= 10) {
+      dispath(
+        showToast({
+          message: "Too many active habbits",
+          type: "error",
+        })
+      );
+    } else {
+      document.getElementById("my_modal_5").showModal();
     }
-  }
+  };
 
   return (
     <>
-      <button
-        className="btn"
-        onClick={newHabbitOpen}
-      >
+      <button className="btn" onClick={newHabbitOpen}>
         New
       </button>
       <dialog
@@ -90,6 +83,7 @@ function NewHabbitModal({ createNewHabbit }) {
                   <h3 className="text-lg font-semibold mb-2">Habit Name:</h3>
                   <label className="block" htmlFor="habbitName">
                     <Field
+                      id="habbitName"
                       name="habbitName"
                       placeholder="E.g Workout"
                       type="text"
@@ -111,6 +105,7 @@ function NewHabbitModal({ createNewHabbit }) {
                   </h3>
                   <label htmlFor="habbitDescription" className="block">
                     <Field
+                      id="habbitDescription"
                       name="habbitDescription"
                       as="textarea"
                       placeholder="e.g I will workout everyday for 30min"
@@ -134,6 +129,7 @@ function NewHabbitModal({ createNewHabbit }) {
                   <label className="block" htmlFor="emoji">
                     <div className="flex space-x-2">
                       <Field
+                        id="emoji"
                         readOnly={true}
                         name="emoji"
                         placeholder=""

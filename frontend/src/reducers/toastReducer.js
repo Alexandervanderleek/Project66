@@ -9,9 +9,6 @@ const toastSlice = createSlice({
     },
     reducers: {
         showToast: (state, action) => {
-
-            console.log(state)
-
             state.message = action.payload.message;
             state.type = action.payload.type;
             state.isVisible = true;
@@ -21,7 +18,6 @@ const toastSlice = createSlice({
         }
     }
 })
-
 
 export const {showToast, hideToast} = toastSlice.actions;
 export default toastSlice.reducer;

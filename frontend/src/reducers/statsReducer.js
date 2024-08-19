@@ -7,10 +7,11 @@ const statsSlice = createSlice({
         setStats(state, action){
             return action.payload;
         },
+        clearStats(state, action){
+            return null;
+        }
     }
-
 });
 
-export const {setStats} = statsSlice.actions
-
-export default statsSlice.reducer
+export const {setStats, clearStats} = statsSlice.actions;
+export default statsSlice.reducer;

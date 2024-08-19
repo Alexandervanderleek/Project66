@@ -1,26 +1,26 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
-import { debounce } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, destroyUser } from "../reducers/userReducer";
 import { clearHabbits } from "../reducers/habbitsReducer";
+import { setLoading } from "../reducers/loaderReducer";
 import { Link, useLocation } from "react-router-dom";
+import {showToast} from '../reducers/toastReducer';
 
+//Navbar component
 function NavBar() {
-  let isScrolled = false;
-
-  const scrollDiv = useRef(null);
+  console.log("navbar reloaded");
 
   const location = useLocation().pathname;
-
-  const dispath = useDispatch();
-
-  const user = useSelector(({ user }) => {
-    return user;
-  });
+  const user = useSelector((state) => state.user);
+  const isLoading = useSelector((state) => state.loading.isLoading);
+  const controller = new AbortController();
+  const dispatch = useDispatch();
 
   //function to handle login
   const handleLogin = () => {
+
+    //open popup for google auth
     const popup = window.open(
       "http://localhost:3000/oauth2/login/google",
       "popup",
@@ -30,30 +30,29 @@ function NavBar() {
     //check for success or failure redirect
     let interval = setInterval(() => {
       if (!popup.closed) return;
-      console.log("getting auth user");  
       getAuthUser();
       return clearInterval(interval);
-      
-      //if (!popup || popup.closed) return;
-      //
     }, 500);
   };
 
+  //function clear store on signout's
   function clearStore(payload) {
-    dispath(clearHabbits());
-    dispath(destroyUser());
+    dispatch(clearHabbits());
+    dispatch(destroyUser());
   }
 
   //function to logout
   const handleLogout = () => {
+    
+    if(isLoading) controller.abort();
+    
     axios
-      .get("/api/user/logout")
-      .then(
-        //remove user client side
-        clearStore()
-      )
+      .get("/api/user/logout", {signal: controller.signal})
+      .then(()=>{
+        clearStore();
+      })
       .catch((err) => {
-        dispath(showToast({
+        dispatch(showToast({
           message: err.message,
           type: 'error'
         }));
@@ -62,16 +61,21 @@ function NavBar() {
 
   //gets the authenticated user from server
   const getAuthUser = () => {
-    console.log("getting user")
+    
+    if(isLoading) controller.abort();
+    
+    dispatch(setLoading({isLoading: true}));
+    
     axios
-      .get("/api/user", { withCredentials: true })
+      .get("/api/user", { withCredentials: true, signal: controller.signal })
       .then((res) => {
         //add to user global store
-        console.log("dispatching")
-        dispath(createUser(res.data));
+        dispatch(setLoading({isLoading: false}));
+        dispatch(createUser(res.data));
       })
       .catch((err) => {
-        dispath(showToast({
+        dispatch(setLoading({isLoading: false}))
+        dispatch(showToast({
           message: err.message,
           type: 'error'
         }));
@@ -79,41 +83,21 @@ function NavBar() {
   };
 
   useEffect(() => {
-    //function for checking if window in scrolled state
-    // const handleScroll = debounce(() => {
-    //     isScrolled = (window.scrollY > 0);
-
-    //     if(isScrolled){
-    //         scrollDiv.current.classList.add('border-b-black');
-    //         scrollDiv.current.classList.add('border-b-2');
-    //     }else{
-    //         scrollDiv.current.classList.remove('border-b-black');
-    //         scrollDiv.current.classList.remove('border-b-2');
-    //     }
-
-    // }, 5)
-
-    //window.addEventListener('scroll', handleScroll)
-
     //attempt a auto login
-    if (!user) {
-      getAuthUser();
-    }
+    if (!user) getAuthUser();
 
-    //return () => {window.removeEventListener('scroll', handleScroll)}
+    return () => {
+      controller.abort();
+    }
   }, []);
 
   return (
-    <div
-      ref={scrollDiv}
-      className={`navbar bg-gray-200 border-b-gray-300 border-b-2 sticky top-0 z-10 justify-center`}
-    >
-      {/* justify between with a max width */}
+    <div className={`navbar bg-gray-200 border-b-gray-300 border-b-2 sticky top-0 z-10 justify-center`}>
       <div className="flex-1 max-w-4xl justify-between my-2 mx-8">
         <div>
-          <h1 className="font-bold text-3xl antialiased">
-            <Link to={user?"/home":"/"}>Project 66</Link> 
-            </h1>
+          <h1 className="font-bold text-3xl font-lilly-one antialiased">
+            <Link className="flex" to={user?"/home":"/"}><span className="hidden sm:block mr-2">Project </span> 66</Link> 
+          </h1>
         </div>
 
         {/* if a user exists load avatar otherwise sign in/ sign out  */}

@@ -31,8 +31,8 @@ function Toast() {
 
   return (
     <div ref={toast} className="toast toast-top toast-center mb-0.5 z-20 animate-fade-in">
-      <div className={`alert ${options[type]}`}>
-        <span>{message}</span>
+      <div className={`alert ${options[type]} flex min-w-24 justify-center`}>
+        <span className="font-semibold">{message}</span>
       </div>
     </div>
   );

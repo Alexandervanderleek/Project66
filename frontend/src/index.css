@@ -2,11 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 html, body, #root {
   height: 100%;
+  overscroll-behavior-y: none;
   margin: 0;
   padding: 0;
+  background-image: repeating-linear-gradient(
+      45deg,
+      #f3f4f6,
+      #f3f4f6 10px,
+      #ffffff 10px,
+      #ffffff 20px
+    );
+    background-size: cover;
+    min-height: 100%;
+    background-attachment: fixed;
 }
+
 
 @keyframes fadeIn {
     from {
@@ -32,6 +46,19 @@ html, body, #root {
 
   .animate-fade-out {
     animation: fadeOut 0.5s ease-out forwards;
+  }
+
+  .diagonal-stripes {
+    background-image: repeating-linear-gradient(
+      45deg,
+      #f3f4f6,
+      #f3f4f6 10px,
+      #ffffff 10px,
+      #ffffff 20px
+    );
+    background-size: cover;
+    min-height: 100%;
+    background-attachment: fixed;
   }
 
 
@@ -65,4 +92,8 @@ html, body, #root {
 
   .animate-complete {
     animation: complete 0.5s ease forwards;
+  }
+
+  .text-shadow-art {
+    text-shadow: 2px 4px 4px rgba(132, 133, 136, 0.5);
   }

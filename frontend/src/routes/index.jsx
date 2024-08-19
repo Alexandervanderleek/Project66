@@ -14,35 +14,26 @@ const Protected = ({children, redirect}) => {
   
   const user = useSelector((state)=>state.user)
   
-  console.log('me')
-
   if(!user){
     return <Navigate to={redirect} ></Navigate>
   }
 
-  return (
-    <>
-    {children}
-    </>
-  )
+  return (<>{children}</>)
 }
 
 //application routes
 const AppRoutes = () => {
   return (
-    <div className='min-h-full bg-gray-50'>
     <Router>
       <Toast></Toast>
-        <Routes>
-            <Route path='/' element={<><NavBar></NavBar><LandingPage/></>}></Route>
-            <Route path='/home' element={<Protected redirect={'/'} ><NavBar/><Home/></Protected>}></Route>
-            <Route path='/stats' element={<Protected redirect={'/'} ><NavBar/><Stats></Stats></Protected>} ></Route>
-            <Route path='/redirect/:id' element={<Redirect></Redirect>}></Route>
-            <Route path="*" element={<NotFound/>} ></Route>
-        </Routes>
-    </Router>   
-    </div>
-  )
+      <Routes>
+        <Route path='/' element={<><NavBar></NavBar><LandingPage/></>}></Route>
+        <Route path='/home' element={<Protected redirect={'/'} ><NavBar/><Home/></Protected>}></Route>
+        <Route path='/stats' element={<Protected redirect={'/'} ><NavBar/><Stats></Stats></Protected>} ></Route>
+        <Route path='/redirect/:id' element={<Redirect></Redirect>}></Route>
+        <Route path="*" element={<NotFound/>} ></Route>
+      </Routes>
+    </Router>)
 }
 
 export default AppRoutes

@@ -11,4 +11,8 @@ habbitsRouter.patch('/:id', habbitController.updateHabbit)
 //delete a habbit
 habbitsRouter.delete('/:id', habbitController.deleteHabbit)
 
+habbitsRouter.delete('/', habbitController.deleteAllHabbits);
+
+
+
 module.exports = habbitsRouter;

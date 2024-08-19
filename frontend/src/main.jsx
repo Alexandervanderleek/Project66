@@ -8,6 +8,7 @@ import userReducer from './reducers/userReducer.js'
 import habbitsReducer from './reducers/habbitsReducer.js'
 import toastReducer from './reducers/toastReducer.js'
 import statsReducer from './reducers/statsReducer.js'
+import loaderReducer from './reducers/loaderReducer.js'
 
 //configure our store
 const store = configureStore({
@@ -15,7 +16,8 @@ const store = configureStore({
     user: userReducer,
     habbits: habbitsReducer,
     toast: toastReducer,
-    stats: statsReducer
+    stats: statsReducer,
+    loading: loaderReducer
   },
 })
 

@@ -82,3 +82,20 @@ exports.deleteHabbit = async (req, res) => {
     }
 }
 
+exports.deleteAllHabbits = async (req, res) => {
+    
+    try{
+        const userId = req.session.passport.user.id;
+        const ids = (await User.findById(userId)).habbits;
+
+        ids.forEach(async (id)=>{
+            await Habbit.findByIdAndDelete(id);
+        })
+
+        res.sendStatus(200);
+
+    }catch(err){
+        next(new InternalError("could not delete errors"+err))
+    }
+}
+
