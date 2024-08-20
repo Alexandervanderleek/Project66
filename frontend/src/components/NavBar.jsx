@@ -21,8 +21,14 @@ function NavBar() {
   const handleLogin = () => {
 
     //open popup for google auth
+    // const popup = window.open(
+    //   "http://localhost:3000/oauth2/login/google",
+    //   "popup",
+    //   `width=500,height=600`
+    // );
+
     const popup = window.open(
-      "http://localhost:3000/oauth2/login/google",
+      "/oauth2/login/google",
       "popup",
       `width=500,height=600`
     );
@@ -45,13 +51,18 @@ function NavBar() {
   const handleLogout = () => {
     
     if(isLoading) controller.abort();
-    
+
+    dispatch(setLoading({isLoading: true}));
+
     axios
       .get("/api/user/logout", {signal: controller.signal})
       .then(()=>{
         clearStore();
+        dispatch(setLoading({isLoading: false}));
+
       })
       .catch((err) => {
+        dispatch(setLoading({isLoading: false}));
         dispatch(showToast({
           message: err.message,
           type: 'error'

@@ -53,19 +53,19 @@ function Habbit({ habbit, index }) {
     
     if(isLoading) controller.abort();
 
-    dispatch(setLoading({isLoading: true}));
+    //dispatch(setLoading({isLoading: true}));
 
     axios
       .delete(`/api/habbits/${habbit.id}`)
       .then(() => {
-        dispatch(setLoading({isLoading: false}));
+        //dispatch(setLoading({isLoading: false}));
         habbitRef.current.classList.add("animate-delete");
         setTimeout(() => {
           dispatch(deleteHabbit(habbit.id));
         }, 500);
       })
       .catch((err) => {
-        dispatch(setLoading({isLoading: false}));
+        //dispatch(setLoading({isLoading: false}));
         dispatch(
           showToast({
             message: err.message,
@@ -79,21 +79,21 @@ function Habbit({ habbit, index }) {
 
     if(isLoading) controller.abort();
 
-    dispatch(setLoading({isLoading: true}))
+    //dispatch(setLoading({isLoading: true}))
 
     setIsExploding(true);
 
     axios
       .patch(`/api/habbits/${habbit.id}`)
       .then((res) => {
-        dispatch(setLoading({isLoading: false}));
+        //dispatch(setLoading({isLoading: false}));
         habbitRef.current.classList.add("animate-complete");
         setTimeout(() => {
           dispatch(updatedHabbit(res.data.updatedHabbit));
         }, 500);
       })
       .catch((err) => {
-        dispatch(setLoading({isLoading: false}));
+        //dispatch(setLoading({isLoading: false}));
         dispatch(
           showToast({
             message: err.message,
@@ -239,7 +239,7 @@ function Habbit({ habbit, index }) {
               disabled={habbit.status !== "active" || !habbit.today}
             >
               {isExploding && <ConfettiExplosion force={0.6} duration={2500} particleCount={80} width={1000}/>}
-              Mark as Done
+              <span className="hidden sm:block">Mark as </span>Done
             </button>
           )}
         </div>

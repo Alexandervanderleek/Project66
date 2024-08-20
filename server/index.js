@@ -10,8 +10,12 @@ const middleware = require('./middleware/middleware');
 const authRouter = require('./routes/authRoutes');
 const userRouter = require('./routes/userRoutes');
 const habbitRouter = require('./routes/habbitRoutes');
+const path = require('path')
 
 const app = express();
+
+
+app.use(express.static('dist'))
 
 //just cors
 app.use(cors({
@@ -42,6 +46,10 @@ app.use('/api/user',middleware.isAuth, userRouter);
 
 //api habbits routes
 app.use('/api/habbits', middleware.isAuth, habbitRouter);
+
+app.get("*", (req,res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+})
 
 //Handle errors
 app.use(middleware.errorHandler);
