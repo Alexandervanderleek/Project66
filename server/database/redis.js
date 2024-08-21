@@ -1,8 +1,15 @@
 const redis = require('redis');
-
+const {REDISCLOUD_URL} = require('../config/config')
 //Create our redis client and export it
 
-const redisClient = redis.createClient()
+
+const redis_url = REDISCLOUD_URL
+
+const redisClient = redis.createClient({
+    //password: REDIS_PASSWORD,
+    url: redis_url,
+
+})
 
 redisClient.on("connect", (message) => {
     console.log("connected redis success");

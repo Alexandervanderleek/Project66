@@ -10,7 +10,6 @@ import { setLoading } from "../reducers/loaderReducer";
 
 //Stats Component
 function Stats() {
-  console.log("Stats Reloaded");
 
   const user = useSelector((state) => state.user);
   const stats = useSelector((state) => state.stats);

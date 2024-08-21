@@ -9,7 +9,6 @@ import {showToast} from '../reducers/toastReducer';
 
 //Navbar component
 function NavBar() {
-  console.log("navbar reloaded");
 
   const location = useLocation().pathname;
   const user = useSelector((state) => state.user);

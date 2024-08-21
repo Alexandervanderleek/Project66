@@ -6,8 +6,8 @@ authRouter.get('/login/google', passport.authenticate("google"));
 
 //redirect google auth
 authRouter.get('/redirect/google',passport.authenticate("google",{
-    successReturnToOrRedirect: 'http://localhost:3000/redirect/1',
-    failureRedirect: 'http://localhost:3000/redirect/2',
+    successReturnToOrRedirect: '/redirect/1',
+    failureRedirect: '/redirect/2',
 }));
 
 module.exports = authRouter;

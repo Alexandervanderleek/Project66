@@ -1,4 +1,4 @@
-const  { User }  = require('../models/User');
+const  User   = require('../models/user');
 const {GOOGLE_SECRET, GOOGLE_ID, GOOGLE_REDIRECT} = require('../config/config')
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20')

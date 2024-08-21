@@ -1,10 +1,10 @@
-const {User} = require('../models/User');
+const User = require('../models/user');
 const { InternalError } = require('../util/customErrors');
 
 //Get user information for current session
 exports.getUser = (req, res) => {
 
-    console.log("getting user")
+    //console.log("getting user")
 
     if(!req.session.passport.user){new InternalError('Something went wrong with user req')}
 
@@ -70,7 +70,7 @@ exports.getAllUserHabbits = async (req, res) => {
     
     const now = new Date();
 
-    console.log("get all")
+    //console.log("get all")
 
     const completeFailedhabbits = await User.findById(req.session.passport.user.id).populate({
         path: 'habbits',

@@ -1,5 +1,5 @@
 const Habbit = require('../models/habbit');
-const {User} = require('../models/User');
+const User = require('../models/user');
 const { InternalError, UserError } = require('../util/customErrors');
 
 //Create a new habbit for a authenticated user

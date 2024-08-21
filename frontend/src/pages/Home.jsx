@@ -8,7 +8,6 @@ import { showToast } from "../reducers/toastReducer";
 import { setLoading } from "../reducers/loaderReducer";
 
 const Home = () => {
-  console.log("Home Reloaded");
   const dispath = useDispatch();
 
   const user = useSelector((state) => state.user);

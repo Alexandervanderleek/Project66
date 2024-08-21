@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 
 //Main landing page
 function LandingPage() {
-  console.log("Landing Reloaded");
 
   const user = useSelector((state) => state.user);
   const isLoading = useSelector((state) => state.loading.isLoading);

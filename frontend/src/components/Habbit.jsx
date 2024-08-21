@@ -7,12 +7,10 @@ import {
 } from "../reducers/habbitsReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../reducers/toastReducer";
-import { setLoading } from "../reducers/loaderReducer";
 import ConfettiExplosion from 'react-confetti-explosion';
 
 
 function Habbit({ habbit, index }) {
-  console.log("Habbit Reloaded")
   
   const hoursRef = useRef(null);
   const minutesRef = useRef(null);

@@ -1,7 +1,7 @@
 const session = require('express-session');
 const redisClient = require('../database/redis');
 const { default: RedisStore } = require('connect-redis');
-const {REDIS_SECRET, NODE_ENV} = require('../config/config')
+const {SESSION_SECRET, NODE_ENV} = require('../config/config')
 
 //Connect the redis client
 redisClient.connect().catch((err)=>console.log("something went wrong"))
@@ -18,14 +18,14 @@ const sesh = session({
    store: redisStore,
    resave: false,
    saveUninitialized: false,
-   secret: REDIS_SECRET,
+   secret: SESSION_SECRET,
    rolling: true,
    cookie: {
     secure: NODE_ENV === 'production',
     sameSite: 'lax',
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
-    domain: 'localhost'
+    //domain: 'localhost'
    }
  });
 
