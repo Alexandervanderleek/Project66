@@ -20,7 +20,12 @@ exports.getUser = (req, res) => {
 //Get all the users habbits
 exports.getUserHabbits = async (req, res) => {
     
-    const now = new Date();
+    const dateTime = new Date();
+    var now_utc = Date.UTC(dateTime.getUTCFullYear(), dateTime.getUTCMonth(),
+    dateTime.getUTCDate(), dateTime.getUTCHours(),
+    dateTime.getUTCMinutes(), dateTime.getUTCSeconds());
+
+    const now = new Date(now_utc);
 
     const habbits = await User.findById(req.session.passport.user.id).populate({
         path: 'habbits',
@@ -68,7 +73,12 @@ exports.getUserHabbits = async (req, res) => {
 //Get all the users habbits
 exports.getAllUserHabbits = async (req, res) => {
     
-    const now = new Date();
+    const dateTime = new Date();
+    var now_utc = Date.UTC(dateTime.getUTCFullYear(), dateTime.getUTCMonth(),
+    dateTime.getUTCDate(), dateTime.getUTCHours(),
+    dateTime.getUTCMinutes(), dateTime.getUTCSeconds());
+
+    const now = new Date(now_utc);
 
     //console.log("get all")
 

@@ -55,7 +55,12 @@ const habbitSchema = new mongoose.Schema({
 //define today virtual [returns if we are indeed in the current window]
 habbitSchema.virtual('today').get(function(){
 
-    const myDate = new Date();
+    const now = new Date();
+    var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(),
+    now.getUTCDate(), now.getUTCHours(),
+    now.getUTCMinutes(), now.getUTCSeconds());
+
+    const myDate = new Date(now_utc);
 
     return this.start <= myDate && myDate <= this.expire;
 });
@@ -68,7 +73,13 @@ habbitSchema.virtual('status').get(function (){
     if(this.Days === 66){
         return 'complete'
     }
-    if(new Date() > this.expire){
+    const now = new Date();
+    var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(),
+    now.getUTCDate(), now.getUTCHours(),
+    now.getUTCMinutes(), now.getUTCSeconds());
+
+    const myDate = new Date(now_utc);
+    if(myDate > this.expire){
         return 'failed';
     }
     return 'active'
