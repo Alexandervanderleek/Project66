@@ -303,7 +303,7 @@ function Stats() {
                   </div>
                   <div className="stat-title font-semibold">T.T.F</div>
                   <div className="stat-value text-2xl sm:text-4xl  text-red-500">
-                    {!failureDays || failed || failed === 0
+                    {failed === 0
                       ? "0"
                       : (failureDays / failed).toFixed(2)}{" "}
                   </div>
