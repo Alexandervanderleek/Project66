@@ -105,7 +105,7 @@ function NavBar() {
     <div className={`navbar bg-gray-200 border-b-gray-300 border-b-2 sticky top-0 z-10 justify-center`}>
       <div className="flex-1 max-w-4xl justify-between mx-2 sm:my-2">
         <div>
-          <h1 className="font-bold text-xl sm:text-3xl font-lilly-one antialiased">
+          <h1 className="font-bold text-2xl sm:text-3xl font-lilly-one antialiased">
             <Link className="flex" to={user?"/home":"/"}><span className="hidden sm:block mr-2">Project </span> 66</Link> 
           </h1>
         </div>
@@ -117,7 +117,7 @@ function NavBar() {
             <Link className={`mr-5 text-sm md:text-lg font-semibold ${location==='/stats'?'text-black font-bold':'text-gray-500'}`} to='/stats'>My Stats</Link>
             <div className="avatar dropdown dropdown-left">
               <div
-                className="w-12 rounded-full cursor-pointer"
+                className="w-10 sm:w-12 rounded-full cursor-pointer"
                 role="button"
                 aria-haspopup="menu"
                 aria-expanded="false"
