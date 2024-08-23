@@ -175,7 +175,7 @@ const Home = () => {
             name="my_tabs_2"
             role="tab"
             className="text-xs sm:text-lg font-semibold tab [--tab-bg:#e5e7eb]"
-            aria-label="Failed & Completed"
+            aria-label="Recent"
           />
           <div role="tabpanel" className="tab-content bg-gray-200 rounded-md">
             <div className="flex justify-center flex-grow items-center min-h-[200px]">

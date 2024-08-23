@@ -157,9 +157,9 @@ function Stats() {
             </div>
 
             <div className="bg-gray-200 p-4 rounded-lg">
-              <div className="stats flex shadow border-gray-200 border-1">
+              <div className="stats text-sm sm:text-xl flex shadow border-gray-200 border-1">
                 <div className="stat flex-1 bg-green-200">
-                  <div className="stat-figure hidden sm:block">
+                  <div className="stat-figure">
                     <svg
                       fill="#22C55E"
                       version="1.1"
@@ -201,11 +201,11 @@ function Stats() {
                     </svg>
                   </div>
                   <div className="stat-title font-semibold">Completed</div>
-                  <div className="stat-value text-green-500">{completed}</div>
+                  <div className="stat-value text-2xl sm:text-4xl  text-green-500">{completed}</div>
                 </div>
 
                 <div className="stat bg-red-200 flex-1">
-                  <div className="stat-figure hidden sm:block">
+                  <div className="stat-figure">
                     <svg
                       width="36px"
                       height="36px"
@@ -236,13 +236,13 @@ function Stats() {
                     </svg>
                   </div>
                   <div className="stat-title font-semibold">Failed</div>
-                  <div className="stat-value text-red-500">{failed}</div>
+                  <div className="stat-value text-2xl sm:text-4xl  text-red-500">{failed}</div>
                 </div>
               </div>
 
-              <div className="stats flex shadow mt-4 border-gray-200 border-1">
+              <div className="stats text-sm sm:text-xl flex shadow mt-4 border-gray-200 border-1">
                 <div className="stat flex-1 bg-green-200">
-                  <div className="stat-figure hidden sm:block">
+                  <div className="stat-figure">
                     <svg
                       height="36px"
                       width="36px"
@@ -278,7 +278,7 @@ function Stats() {
                     </svg>
                   </div>
                   <div className="stat-title font-semibold">Ratio</div>
-                  <div className="stat-value text-green-500">
+                  <div className="stat-value text-2xl sm:text-4xl  text-green-500">
                     {(!completed && !failed) || completed === 0 || failed === 0
                       ? "0"
                       : (completed / failed).toFixed(2)}
@@ -286,7 +286,7 @@ function Stats() {
                 </div>
 
                 <div className="stat flex-1 bg-red-200">
-                  <div className="stat-figure hidden sm:block">
+                  <div className="stat-figure">
                     <svg
                       width="36px"
                       height="36px"
@@ -301,8 +301,8 @@ function Stats() {
                       </g>
                     </svg>
                   </div>
-                  <div className="stat-title font-semibold">Days to fail</div>
-                  <div className="stat-value text-red-500">
+                  <div className="stat-title font-semibold">T.T.F</div>
+                  <div className="stat-value text-2xl sm:text-4xl  text-red-500">
                     {!failureDays || failed || failed === 0
                       ? "0"
                       : (failureDays / failed).toFixed(2)}{" "}
