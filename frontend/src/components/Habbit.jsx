@@ -8,6 +8,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../reducers/toastReducer";
 import ConfettiExplosion from 'react-confetti-explosion';
+import { FaTrashCan, FaCircleCheck  } from "react-icons/fa6";
+
 
 
 function Habbit({ habbit, index }) {
@@ -152,25 +154,25 @@ function Habbit({ habbit, index }) {
           {habbit.status === "active" && habbit.today === true && (
             <div>
               <p className="text-sm text-gray-500">Time Left</p>
-              <span className="countdown font-mono text-xl">
+              <span className="countdown font-mono text-sm md:text-xl">
                 <span ref={hoursRef}></span>:<span ref={minutesRef}></span>:
                 <span ref={secondsRef}></span>
               </span>
             </div>
           )}
-          <div>
+          <div className="flex flex-col justify-between">
             {habbit.status === "active" && habbit.today === false ? (
               <div className="flex flex-row space-x-2 text-center">
                 <div>
                   <p className="text-sm text-gray-500">Completed</p>
-                  <p className="font-semibold">
+                  <p className="font-semibold text-sm md:text-lg">
                     <span className={"text-green-500"}>{habbit.Days}</span>
                   </p>
                 </div>
 
                 <div>
                   <p className="text-sm text-gray-500">Remaining</p>
-                  <p className="font-semibold">
+                  <p className="font-semibold text-sm md:text-lg">
                     <span className={"text-red-500"}>{66 - habbit.Days}</span>
                   </p>
                 </div>
@@ -178,7 +180,7 @@ function Habbit({ habbit, index }) {
             ) : (
               <>
                 <p className="text-sm text-gray-500">Days</p>
-                <p className="font-semibold">
+                <p className="font-semibold text-sm md:text-lg">
                   <span
                     className={
                       (!habbit.today && habbit.status !== "failed") ||
@@ -202,7 +204,8 @@ function Habbit({ habbit, index }) {
               }
               className="btn btn-error btn-sm"
             >
-              Delete
+              <span className="hidden sm:block">Delete</span>
+              <FaTrashCan className="block sm:hidden"></FaTrashCan>
             </button>
           ) : (
             <p className="text-sm text-gray-500">
@@ -237,7 +240,8 @@ function Habbit({ habbit, index }) {
               disabled={habbit.status !== "active" || !habbit.today}
             >
               {isExploding && <ConfettiExplosion force={0.6} duration={2500} particleCount={80} width={1000}/>}
-              <span className="hidden sm:block">Mark as </span>Done
+              <span className="hidden sm:block">Mark as Done</span>
+              <FaCircleCheck className="block sm:hidden"></FaCircleCheck>
             </button>
           )}
         </div>

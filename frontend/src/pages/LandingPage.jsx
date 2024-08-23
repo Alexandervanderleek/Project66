@@ -34,7 +34,7 @@ function LandingPage() {
           </h2>
 
           <div className="flex flex-col lg:flex-row text-3xl text-center">
-            <div className="hover:scale-105 duration-100 ease-in-out relative p-4">
+            <div className="sm:hover:scale-105 duration-100 ease-in-out relative p-4">
               <div className="font-permanent-marker group-hover:text-4xl duration-100 ease-in-out">
                 Create
               </div>
@@ -57,7 +57,7 @@ function LandingPage() {
                 </svg>
               </div>
             </div>
-            <div className="hover:scale-105 duration-100 ease-in-out relative p-4">
+            <div className="sm:hover:scale-105 duration-100 ease-in-out relative p-4">
               <span className="font-permanent-marker">Track</span>
               <img
                 className="drop-shadow-lg border-2 border-black rounded-lg"
@@ -81,7 +81,7 @@ function LandingPage() {
           </div>
 
           <div className="flex text-3xl text-center">
-            <div className="p-4 hover:scale-105 duration-100 ease-in-out">
+            <div className="p-4 sm:hover:scale-105 duration-100 ease-in-out">
               <span className="font-permanent-marker">Analyze</span>
               <img
                 className="drop-shadow-lg border-2 border-black rounded-lg"

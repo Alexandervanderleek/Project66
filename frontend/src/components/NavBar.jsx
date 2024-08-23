@@ -103,9 +103,9 @@ function NavBar() {
 
   return (
     <div className={`navbar bg-gray-200 border-b-gray-300 border-b-2 sticky top-0 z-10 justify-center`}>
-      <div className="flex-1 max-w-4xl justify-between my-2 mx-8">
+      <div className="flex-1 max-w-4xl justify-between mx-2 sm:my-2">
         <div>
-          <h1 className="font-bold text-3xl font-lilly-one antialiased">
+          <h1 className="font-bold text-xl sm:text-3xl font-lilly-one antialiased">
             <Link className="flex" to={user?"/home":"/"}><span className="hidden sm:block mr-2">Project </span> 66</Link> 
           </h1>
         </div>
@@ -113,8 +113,8 @@ function NavBar() {
         {/* if a user exists load avatar otherwise sign in/ sign out  */}
         {user ? (
           <div className="flex items-center">
-            <Link className={`mr-5 font-semibold ${location==='/home'?'text-black font-bold':'text-gray-500'}`} to='/home'>Home</Link> 
-            <Link className={`mr-5 font-semibold ${location==='/stats'?'text-black font-bold':'text-gray-500'}`} to='/stats'>My Stats</Link>
+            <Link className={`mr-5 text-sm md:text-lg font-semibold ${location==='/home'?'text-black font-bold':'text-gray-500'}`} to='/home'>Home</Link> 
+            <Link className={`mr-5 text-sm md:text-lg font-semibold ${location==='/stats'?'text-black font-bold':'text-gray-500'}`} to='/stats'>My Stats</Link>
             <div className="avatar dropdown dropdown-left">
               <div
                 className="w-12 rounded-full cursor-pointer"
@@ -123,7 +123,7 @@ function NavBar() {
                 aria-expanded="false"
                 tabIndex="0"
               >
-                <img src={user.picture} alt="User avatar" />
+                <img src={user?.picture} alt="User avatar" />
               </div>
               <ul
                 className="menu dropdown-content bg-base-100 rounded-box z-[1] w-36 p-2 shadow"
@@ -142,7 +142,7 @@ function NavBar() {
             </div>
           </div>
         ) : (
-          <button onClick={handleLogin} className="btn btn-neutral">
+          <button onClick={handleLogin} className="btn btn-neutral btn-sm text-xs sm:btn-md sm:text-sm">
             Login
           </button>
         )}
