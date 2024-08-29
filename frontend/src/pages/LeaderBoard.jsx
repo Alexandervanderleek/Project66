@@ -61,7 +61,7 @@ function LeaderBoard() {
 
   if (isLoading) {
     return (
-      <div className="flex h-full w-full justify-center bg-gray-800/70 z-10">
+      <div className="flex h-full w-full justify-center items-start bg-gray-800/70 z-10">
         <span className="loading text-gray-200 loading-spinner loading-lg mt-16"></span>
       </div>
     );
