@@ -55,7 +55,7 @@ const Home = () => {
         dispath(setLoading({ isLoading: false }));
         dispath(
           showToast({
-            message: err.message,
+            message: err.response.data.error,
             type: "error",
           })
         );

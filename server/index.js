@@ -1,5 +1,5 @@
 require('./database/db')();
-const {PORT} = require('./config/config')
+const {PORT, NODE_ENV} = require('./config/config')
 const {sesh} =  require('./util/session');
 const express = require('express');
 const cors = require('cors');
@@ -22,6 +22,10 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true
 }));
+
+if (NODE_ENV === 'production') {
+    app.set('trust proxy', 1); // trust first proxy
+}
 
 //parse json
 app.use(express.json());
