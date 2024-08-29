@@ -59,21 +59,16 @@ function LeaderBoard() {
 
   //console.log(leaderboard)
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="fixed h-full w-full bg-gray-800/70 z-10 text-center">
-  //       <span className="loading text-gray-200 loading-spinner loading-lg mt-16"></span>
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="flex h-full w-full justify-center bg-gray-800/70 z-10">
+        <span className="loading text-gray-200 loading-spinner loading-lg mt-16"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex justify-center items-center">
-      {isLoading && (
-        <div className="fixed h-full w-full bg-gray-800/70 z-10 text-center">
-          <span className="loading text-gray-200 loading-spinner loading-lg mt-16"></span>
-        </div>
-      )}
       <div className="flex justify-center items-center w-full md:w-3/4 xl:w-1/2 flex-col">
         <div className="flex w-[75%] justify-between items-end font-bold my-4 text-sm sm:text-xl md:text-2xl ">
           <p className="font-bold">
@@ -84,7 +79,7 @@ function LeaderBoard() {
           </div>
         </div>
 
-        {leaderboard?.leaderboard?.length > 0 ? (
+        {leaderboard?.leaderboard?.length > 0 && (
           <div className="flex justify-center items-center flex-col w-full">
             <div className="flex w-[75%] bg-gray-300 rounded-lg py-1 items-center">
               <div className="flex justify-center flex-[1] font-semibold text-xs sm:text-lg">
@@ -226,8 +221,6 @@ function LeaderBoard() {
               </div>
             ))}
           </div>
-        ) : (
-          <div>no</div>
         )}
       </div>
     </div>
