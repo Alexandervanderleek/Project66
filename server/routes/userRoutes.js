@@ -7,6 +7,9 @@ userRouter.get('/', userController.getUser);
 //get the user habbits
 userRouter.get('/habbits', userController.getUserHabbits);
 
+//get the user leaderboard
+userRouter.get('/leaderboard', userController.getUserLeaderBoard);
+
 //get the user habbits
 userRouter.get('/stats', userController.getAllUserHabbits);
 

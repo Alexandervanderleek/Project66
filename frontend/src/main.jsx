@@ -9,6 +9,7 @@ import habbitsReducer from './reducers/habbitsReducer.js'
 import toastReducer from './reducers/toastReducer.js'
 import statsReducer from './reducers/statsReducer.js'
 import loaderReducer from './reducers/loaderReducer.js'
+import leaderBoardReducer from './reducers/leaderBoardReducer.js'
 
 //configure our store
 const store = configureStore({
@@ -17,7 +18,8 @@ const store = configureStore({
     habbits: habbitsReducer,
     toast: toastReducer,
     stats: statsReducer,
-    loading: loaderReducer
+    loading: loaderReducer,
+    leaderboard: leaderBoardReducer
   },
 })
 

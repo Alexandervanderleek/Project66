@@ -1,5 +1,5 @@
 const redis = require('redis');
-const {REDISCLOUD_URL} = require('../config/config')
+const {REDISCLOUD_URL, NODE_ENV} = require('../config/config')
 //Create our redis client and export it
 
 
@@ -7,7 +7,7 @@ const redis_url = REDISCLOUD_URL
 
 const redisClient = redis.createClient({
     //password: REDIS_PASSWORD,
-    url: redis_url,
+    url: NODE_ENV==='production'?redis_url:null,
 
 })
 

@@ -9,6 +9,7 @@ const errorHandler = (error, req, res, next) => {
 
     //if we have a internal error
     if(error.name === "INTERNAL"){
+        console.error(error)
         return res.status(500).json({error:"Internal Server Error"});
         //if we have a user error
     } else if (error.name === "USER"){

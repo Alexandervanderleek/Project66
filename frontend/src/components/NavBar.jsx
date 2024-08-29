@@ -25,7 +25,7 @@ function NavBar() {
     //   "popup",
     //   `width=500,height=600`
     // );
-
+    //"/oauth2/login/google",
     const popup = window.open(
       "/oauth2/login/google",
       "popup",
@@ -113,7 +113,8 @@ function NavBar() {
         {/* if a user exists load avatar otherwise sign in/ sign out  */}
         {user ? (
           <div className="flex items-center">
-            <Link className={`mr-5 text-sm md:text-lg font-semibold ${location==='/home'?'text-black font-bold':'text-gray-500'}`} to='/home'>Home</Link> 
+            <Link className={`mr-5 text-sm md:text-lg font-semibold ${location==='/home'?'text-black font-bold':'text-gray-500'}`} to='/home'>Home</Link>
+            <Link className={`mr-5 text-sm md:text-lg font-semibold ${location==='/leaderboard'?'text-black font-bold':'text-gray-500'}`} to='/leaderboard'>Leaderboard</Link>  
             <Link className={`mr-5 text-sm md:text-lg font-semibold ${location==='/stats'?'text-black font-bold':'text-gray-500'}`} to='/stats'>My Stats</Link>
             <div className="avatar dropdown dropdown-left">
               <div

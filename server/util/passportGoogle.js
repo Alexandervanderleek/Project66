@@ -51,9 +51,16 @@ passport.use(
 //Serialize the user item
 //called before session created, and defines what goes in the session
 passport.serializeUser((req, user, cb) => {
-    try{        
+    try{
+        //console.log(user)
         process.nextTick(()=>{
-            cb(null, user);
+            cb(null, {
+                name:user.name,
+                picture:user.picture,
+                //email:user.email,
+                completed: user.completed,
+                id: user.id
+            });
         })
     }catch(err){
         new InternalError("Serialization failed");
@@ -64,6 +71,7 @@ passport.serializeUser((req, user, cb) => {
 //called subsequent requests get information out of session w/id done for us
 passport.deserializeUser(async (req, user, cb) => { 
     if(user) {
+        //console.log(user)
         try{
             return cb(null, user);
         } catch (error){

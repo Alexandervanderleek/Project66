@@ -12,6 +12,10 @@ const userSchema = new Schema({
         required: [true,'need a email'],
         unique: [true,'need a unique email'],
     },
+    completed:{
+        type: Number,
+        default: 0
+    },
     picture:{
         type: String
     },

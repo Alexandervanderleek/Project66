@@ -5,12 +5,12 @@ const { InternalError } = require('../util/customErrors');
 exports.getUser = (req, res) => {
 
     //console.log("getting user")
-
     if(!req.session.passport.user){new InternalError('Something went wrong with user req')}
 
     const returnedUserObject = {
         name: req.session.passport.user.name,
-        email: req.session.passport.user.email,
+        //email: req.session.passport.user.email,
+        completed: req.session.passport.user.completed,
         picture: req.session.passport.user.picture
     }
 
@@ -69,7 +69,6 @@ exports.getUserHabbits = async (req, res) => {
 }
 
 
-
 //Get all the users habbits
 exports.getAllUserHabbits = async (req, res) => {
     
@@ -108,4 +107,28 @@ exports.getAllUserHabbits = async (req, res) => {
     })
 }
 
+exports.getUserLeaderBoard = async (req, res) => {
+    //console.log("gettitng leaderboard")
+    try{
+        //query, projection, options
+        const leaderBoard = await User.find({},{completed:1,name:1},{limit: 30,sort:{completed: -1}});
+        
+        // const currentUser = await User.findById(req.session.passport.user.id, { completed: 1 });
+
+        const userPosition = await User.countDocuments({completed: {$gt: req.session.passport.user.completed}})+1;
+        
+        res.status(200).json({
+            position: userPosition,
+            leaderboard: leaderBoard
+        })
+
+        // res.status(200).json({
+        //     l:leaderBoard,
+        //     u:userPosition
+        // });
+    }catch(err){
+        console.log(err)
+        throw new InternalError('Error getting leaderboard');
+    }
+}
 

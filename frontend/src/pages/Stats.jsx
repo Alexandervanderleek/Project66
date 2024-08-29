@@ -321,11 +321,11 @@ function Stats() {
                         stat.status === "failed" ? "bg-red-200" : "bg-green-200"
                       }`}
                     >
-                      <span className="font-semibold text-lg">
+                      <span className="font-semibold text-sm sm:text-lg">
                         {stat.title}:
                       </span>
                       <br></br>
-                      <div className="font-light text-gray-500">
+                      <div className="font-light text-xs sm:text-sm text-gray-500">
                         {stat.expire.split("T")[0]}
                       </div>
                     </div>

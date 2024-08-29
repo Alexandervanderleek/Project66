@@ -52,6 +52,14 @@ exports.updateHabbit = async (req, res) => {
         const oldHabbit = await Habbit.findById(req.params.id);
         const newDays = oldHabbit.Days+1
 
+        if(newDays===66){
+            try {
+                await User.findByIdAndUpdate(oldHabbit.user, {$inc : {'completed':1}})                
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
         const updatedHabbit = await Habbit.findByIdAndUpdate(req.params.id, {
             start: oldHabbit.expire,
             expire: new Date(oldHabbit.expire.getTime() + 24 * 60 * 60 * 1000),
