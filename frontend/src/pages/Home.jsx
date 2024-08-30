@@ -8,7 +8,8 @@ import { showToast } from "../reducers/toastReducer";
 import { setLoading } from "../reducers/loaderReducer";
 
 const Home = () => {
-  const dispath = useDispatch();
+  
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
   const habbits = useSelector((state) => state.habbits);
@@ -43,30 +44,29 @@ const Home = () => {
       status: "active",
     };
 
-    dispath(setLoading({ isLoading: true }));
+    dispatch(setLoading({ isLoading: true }));
 
     axios
       .post("/api/habbits/new", newHabbit, {signal: controller.signal})
       .then((res) => {
-        dispath(setLoading({ isLoading: false }));
-        dispath(addHabbit(res.data.createdHabbit));
+        //dispatch(setLoading({ isLoading: false }));
+        dispatch(addHabbit(res.data.createdHabbit));
       })
       .catch((err) => {
-        dispath(setLoading({ isLoading: false }));
-        dispath(
-          showToast({
-            message: err.response.data.error,
-            type: "error",
-          })
-        );
-      });
+        //dispatch(setLoading({ isLoading: false }));
+        dispatch(
+          showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
+        ); 
+      }).then(()=>{
+        dispatch(setLoading({ isLoading: false }));
+      })
   };
 
   useEffect(() => {
     const effectController = new AbortController();
 
     if (user && !habbits) {
-      dispath(setLoading({ isLoading: true }));
+      dispatch(setLoading({ isLoading: true }));
 
       axios
         .get("/api/user/habbits", {
@@ -74,17 +74,14 @@ const Home = () => {
           signal: effectController.signal,
         })
         .then((res) => {
-          dispath(setLoading({ isLoading: false }));
-          dispath(setHabbits(res.data.habbits));
+          dispatch(setLoading({ isLoading: false }));
+          dispatch(setHabbits(res.data.habbits));
         })
         .catch((err) => {
-          dispath(setLoading({ isLoading: false }));
-          dispath(
-            showToast({
-              message: err.message,
-              type: "error",
-            })
-          );
+          dispatch(setLoading({ isLoading: false }));
+          dispatch(
+            showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
+          ); 
         });
     }
 

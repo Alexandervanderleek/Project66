@@ -32,15 +32,9 @@ function LeaderBoard() {
       })
       .catch((err) => {
         //console.log("error");
-        if(err.response){
-          dispatch(
-            showToast({ message: err.response.data.error, type: "error" })
-          );
-        }else{
-          dispatch(
-            showToast({ message: "An error occured", type: "error" })
-          );
-        }
+        dispatch(
+          showToast({ message: err.response?.data ? err.response.data.error:"An error occured", type: "error" })
+        );     
         //dispatch(setLoading({ isLoading: false }));
         
       })

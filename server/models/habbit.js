@@ -58,7 +58,7 @@ habbitSchema.virtual('today').get(function(){
     const now = new Date();
     var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(),
     now.getUTCDate(), now.getUTCHours(),
-    now.getUTCMinutes(), now.getUTCSeconds());
+    now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
     const myDate = new Date(now_utc);
 
@@ -76,7 +76,7 @@ habbitSchema.virtual('status').get(function (){
     const now = new Date();
     var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(),
     now.getUTCDate(), now.getUTCHours(),
-    now.getUTCMinutes(), now.getUTCSeconds());
+    now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 
     const myDate = new Date(now_utc);
     if(myDate > this.expire){

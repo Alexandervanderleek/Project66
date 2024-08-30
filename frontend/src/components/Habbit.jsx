@@ -67,11 +67,8 @@ function Habbit({ habbit, index }) {
       .catch((err) => {
         //dispatch(setLoading({isLoading: false}));
         dispatch(
-          showToast({
-            message: err.message,
-            type: "error",
-          })
-        );
+          showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
+        ); 
       });
   };
 
@@ -95,11 +92,8 @@ function Habbit({ habbit, index }) {
       .catch((err) => {
         //dispatch(setLoading({isLoading: false}));
         dispatch(
-          showToast({
-            message: err.message,
-            type: "error",
-          })
-        );
+          showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
+        ); 
       });
   };
 

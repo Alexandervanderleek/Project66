@@ -39,11 +39,8 @@ function Stats() {
         .catch((err) => {
           dispatch(setLoading({ isLoading: false }));
           dispatch(
-            showToast({
-              message: err.message,
-              type: "error",
-            })
-          );
+            showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
+          ); 
         });
     }
 
@@ -69,11 +66,8 @@ function Stats() {
       .catch((err) => {
         dispatch(setLoading({ isLoading: false }));
         dispatch(
-          showToast({
-            message: err.message,
-            type: "error",
-          })
-        );
+          showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
+        ); 
       });
   };
 
@@ -301,7 +295,7 @@ function Stats() {
                       </g>
                     </svg>
                   </div>
-                  <div className="stat-title font-semibold">T.T.F</div>
+                  <div className="stat-title font-semibold" >T.T.F</div>
                   <div className="stat-value text-2xl sm:text-4xl  text-red-500">
                     {failed === 0
                       ? "0"
