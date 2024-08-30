@@ -32,7 +32,7 @@ html, body, #root {
   }
   
   .animate-fade-in {
-    animation: fadeIn 1.0s ease-in forwards;
+    animation: fadeIn 0.5s ease-in forwards;
   }
 
 @keyframes fadeOut {
