@@ -13,6 +13,8 @@ userRouter.get('/leaderboard', userController.getUserLeaderBoard);
 //get the user habbits
 userRouter.get('/stats', userController.getAllUserHabbits);
 
+userRouter.delete('/delete', userController.deleteUser);
+
 //logout a user i.e destroy our session
 userRouter.get('/logout', (req, res) => {
     try{

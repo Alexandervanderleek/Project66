@@ -24,6 +24,7 @@ const errorHandler = (error, req, res, next) => {
 //check for session that isAuthenticated
 const isAuth = (req,res,next) => {
     //console.log("is auth")
+    //next()
     if(req.isAuthenticated()){
         next();
     }

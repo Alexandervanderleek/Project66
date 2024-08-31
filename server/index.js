@@ -11,10 +11,16 @@ const authRouter = require('./routes/authRoutes');
 const userRouter = require('./routes/userRoutes');
 const habbitRouter = require('./routes/habbitRoutes');
 const path = require('path')
+const rateLimit =  require('express-rate-limit');
 
 const app = express();
 
+const limit = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 75,
+})
 
+app.use(limit);
 app.use(express.static('dist'))
 
 //just cors

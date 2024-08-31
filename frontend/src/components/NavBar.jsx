@@ -68,6 +68,28 @@ function NavBar() {
       });
   };
 
+  const handleDelete = () => {
+    
+    if(isLoading) controller.abort();
+
+    dispatch(setLoading({isLoading: true}));
+
+    axios
+      .delete("/api/user/Delete", {signal: controller.signal})
+      .then(()=>{
+        clearStore();
+        dispatch(setLoading({isLoading: false}));
+
+      })
+      .catch((err) => {
+        dispatch(setLoading({isLoading: false}));
+        dispatch(
+          showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
+        ); 
+      });
+  };
+
+
   //gets the authenticated user from server
   const getAuthUser = () => {
     
@@ -104,7 +126,7 @@ function NavBar() {
       <div className="flex-1 max-w-4xl justify-between mx-2 sm:my-2">
         <div>
           <h1 className="font-bold text-2xl sm:text-3xl font-lilly-one antialiased">
-            <Link className="flex" to={user?"/home":"/"}><span className="hidden sm:block mr-2">Project </span> 66</Link> 
+            <Link className="flex" to={user?"/home":"/"}><span className="hidden sm:block mr-2">Habbit for </span> 66</Link> 
           </h1>
         </div>
 
@@ -128,13 +150,22 @@ function NavBar() {
                 className="menu dropdown-content bg-base-100 rounded-box z-[1] w-36 p-2 shadow"
                 role="menu"
               >
-                <li role="none">
+                <li role="none" className="mb-2 bg-red-200 rounded-lg">
                   <button
                     onClick={handleLogout}
                     className="text-red-500 font-bold w-full text-left"
                     role="menuitem"
                   >
                     Sign out
+                  </button>
+                </li>
+                <li role="none" className="bg-gray-300 rounded-lg">
+                  <button
+                    onClick={handleDelete}
+                    className="text-gray-700 font-bold w-full text-left"
+                    role="menuitem"
+                  >
+                    Delete Account
                   </button>
                 </li>
               </ul>

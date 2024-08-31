@@ -68,7 +68,6 @@ exports.getUserHabbits = async (req, res) => {
     })
 }
 
-
 //Get all the users habbits
 exports.getAllUserHabbits = async (req, res) => {
     
@@ -129,6 +128,19 @@ exports.getUserLeaderBoard = async (req, res) => {
     }catch(err){
         console.log(err)
         throw new InternalError('Error getting leaderboard');
+    }
+}
+
+//Get user information for current session
+exports.deleteUser = async (req, res) => {
+    try{
+        //req.session.passport.user.id
+        await User.deleteOne({_id:req.session.passport.user.id})
+        req.session.destroy();
+        
+        res.sendStatus(200);
+    }catch(error){
+        throw new InternalError("Could not destroy user session "+error);
     }
 }
 

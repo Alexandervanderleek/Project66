@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const habbit = require('./habbit');
 
 const Schema = mongoose.Schema;
 
@@ -29,6 +30,18 @@ const userSchema = new Schema({
 },{
     timestamps: true
 });
+
+userSchema.pre('deleteOne', async function (next){
+    
+    try {
+        await Habbit.deleteMany({user: this._conditions._id})        
+    } catch (error) {
+        console.log(error)
+    }
+
+    next();
+
+})
 
 //How toJson for user db object
 userSchema.set('toJSON', {

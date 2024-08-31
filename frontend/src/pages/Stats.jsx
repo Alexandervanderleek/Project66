@@ -7,6 +7,7 @@ import { clearHabbits } from "../reducers/habbitsReducer";
 import { clearStats } from "../reducers/statsReducer";
 import { showToast } from "../reducers/toastReducer";
 import { setLoading } from "../reducers/loaderReducer";
+import Footer from "../components/Footer";
 
 //Stats Component
 function Stats() {
@@ -81,7 +82,7 @@ function Stats() {
   });
 
   return (
-    <div className="flex justify-center items-start min-h-0.5">
+    <div className="flex flex-col justify-between items-center min-h-screen">
       {isLoading && (
         <div className="fixed h-full w-full bg-gray-800/70 z-10 text-center">
           <span className="loading text-gray-200 loading-spinner loading-lg mt-16"></span>
@@ -111,7 +112,7 @@ function Stats() {
           </div>
         </div>
       </dialog>
-      <div className="w-full md:w-3/4 xl:w-1/2 flex flex-col">
+      <div className="w-full md:w-3/4 xl:w-1/2 flex flex-col flex-grow">
         
             <div className="flex justify-between p-3 items-center">
               <h1 className="font-bold text-2xl">Your Stats</h1>
@@ -384,6 +385,9 @@ function Stats() {
               </ul>
             </div>
       </div>
+      
+      <Footer></Footer>
+
     </div>
   );
 }

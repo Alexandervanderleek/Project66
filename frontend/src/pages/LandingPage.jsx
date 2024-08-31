@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 //Main landing page
 function LandingPage() {
@@ -15,7 +16,7 @@ function LandingPage() {
 
   //main landing page
   return (
-    <div className="flex flex-col w-full items-center justify-center">
+    <div className="flex flex-col w-full min-h-screen items-center justify-center">
       {isLoading ? (
         <>
           <span className="loading loading-spinner loading-lg mt-16"></span>
@@ -92,7 +93,11 @@ function LandingPage() {
             </div>
           </div>
         </>
-      )};
+      )}
+      <div className="flex flex-grow">
+
+      </div>
+      <Footer></Footer>
     </div>
   );
 }

@@ -11,14 +11,14 @@ html, body, #root {
   padding: 0;
   background-image: repeating-linear-gradient(
       45deg,
-      #f3f4f6,
-      #f3f4f6 10px,
+      #f5f6f7,
+      #f5f6f7 10px,
       #ffffff 10px,
       #ffffff 20px
     );
-    background-size: cover;
-    min-height: 100%;
-    background-attachment: fixed;
+  background-size: cover;
+  min-height: 100%;
+  background-attachment: fixed;
 }
 
 
@@ -51,8 +51,8 @@ html, body, #root {
   .diagonal-stripes {
     background-image: repeating-linear-gradient(
       45deg,
-      #f3f4f6,
-      #f3f4f6 10px,
+      #f5f6f7,
+      #f5f6f7 10px,
       #ffffff 10px,
       #ffffff 20px
     );

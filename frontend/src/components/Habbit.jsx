@@ -4,22 +4,30 @@ import {
   deleteHabbit,
   updatedHabbit,
   failedHabbit,
+  addHabbit,
 } from "../reducers/habbitsReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../reducers/toastReducer";
-import ConfettiExplosion from 'react-confetti-explosion';
-import { FaTrashCan, FaCircleCheck  } from "react-icons/fa6";
-
-
+import ConfettiExplosion from "react-confetti-explosion";
+import { FaTrashCan, FaCircleCheck } from "react-icons/fa6";
 
 function Habbit({ habbit, index }) {
-  
   const hoursRef = useRef(null);
   const minutesRef = useRef(null);
   const secondsRef = useRef(null);
   const habbitRef = useRef(null);
-  const isLoading = useSelector((state)=>state.loading.isLoading);
+  const isLoading = useSelector((state) => state.loading.isLoading);
   const controller = new AbortController();
+
+  let animating = false;
+
+  habbitRef.current?.addEventListener("animationend", () => {
+    animating = false;
+  });
+
+  habbitRef.current?.addEventListener("animationstart", () => {
+    animating = true;
+  });
 
   const dispatch = useDispatch();
   const [isExploding, setIsExploding] = useState(false);
@@ -50,36 +58,40 @@ function Habbit({ habbit, index }) {
   }, []);
 
   const handleDelete = () => {
-    
-    if(isLoading) controller.abort();
+    if (isLoading) controller.abort();
 
     //dispatch(setLoading({isLoading: true}));
 
-    axios
-      .delete(`/api/habbits/${habbit.id}`)
-      .then(() => {
-        //dispatch(setLoading({isLoading: false}));
-        habbitRef.current.classList.add("animate-delete");
-        setTimeout(() => {
-          dispatch(deleteHabbit(habbit.id));
-        }, 500);
-      })
-      .catch((err) => {
-        //dispatch(setLoading({isLoading: false}));
-        dispatch(
-          showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
-        ); 
-      });
+    habbitRef.current.classList.add("animate-delete");
+    setTimeout(() => {
+      dispatch(deleteHabbit(habbit.id));
+      axios
+        .delete(`/api/habbits/${habbit.id}`)
+        .then(() => {
+          //dispatch(setLoading({isLoading: false}));
+          return;
+        })
+        .catch((err) => {
+          //dispatch(setLoading({isLoading: false}));
+          dispatch(addHabbit(habbit));
+          dispatch(
+            showToast({
+              message: err.response?.data
+                ? err.response.data.error
+                : "An Error Occured",
+              type: "error",
+            })
+          );
+        });
+    }, 500);
   };
 
   const handleComplete = () => {
-
-    if(isLoading) controller.abort();
+    if (isLoading) controller.abort();
 
     //dispatch(setLoading({isLoading: true}))
 
     setIsExploding(true);
-
     axios
       .patch(`/api/habbits/${habbit.id}`)
       .then((res) => {
@@ -88,12 +100,18 @@ function Habbit({ habbit, index }) {
         setTimeout(() => {
           dispatch(updatedHabbit(res.data.updatedHabbit));
         }, 500);
+        //console.log(habbitRef.current);
       })
       .catch((err) => {
         //dispatch(setLoading({isLoading: false}));
         dispatch(
-          showToast({ message: err.response?.data ? err.response.data.error:"An Error Occured", type: "error" })
-        ); 
+          showToast({
+            message: err.response?.data
+              ? err.response.data.error
+              : "An Error Occured",
+            type: "error",
+          })
+        );
       });
   };
 
@@ -233,7 +251,14 @@ function Habbit({ habbit, index }) {
               onClick={handleComplete}
               disabled={habbit.status !== "active" || !habbit.today}
             >
-              {isExploding && <ConfettiExplosion force={0.6} duration={2500} particleCount={80} width={1000}/>}
+              {isExploding && (
+                <ConfettiExplosion
+                  force={0.6}
+                  duration={2500}
+                  particleCount={80}
+                  width={1000}
+                />
+              )}
               <span className="hidden sm:block">Mark as Done</span>
               <FaCircleCheck className="block sm:hidden"></FaCircleCheck>
             </button>

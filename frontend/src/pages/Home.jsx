@@ -6,6 +6,8 @@ import Habbit from "../components/Habbit";
 import { addHabbit, setHabbits } from "../reducers/habbitsReducer";
 import { showToast } from "../reducers/toastReducer";
 import { setLoading } from "../reducers/loaderReducer";
+import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Home = () => {
   
@@ -89,19 +91,20 @@ const Home = () => {
   }, [user]);
 
   return (
-    <div className="flex justify-center items-start min-h-0.5">
-      {isLoading && (
-        <div className="fixed h-full w-full z-10 text-center">
-          <span className="loading text-gray-200 bg-black loading-spinner loading-lg mt-16"></span>
-        </div>
-      )}
-      <div className="w-full md:w-3/4 xl:w-1/2 flex flex-col">
+    <div className="flex flex-col min-h-screen">
+    {isLoading && (
+      <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
+        <span className="loading loading-spinner loading-lg text-gray-200"></span>
+      </div>
+    )}
+    <div className="flex-grow flex flex-col items-center">
+      <div className="w-full md:w-3/4 xl:w-1/2 flex flex-col flex-grow">
         <div className="flex justify-between p-3 items-center">
           <h1 className="font-bold text-2xl">Your habbits</h1>
           <NewHabbitModal createNewHabbit={createNewHabbit} />
         </div>
 
-        <div role="tablist" className="tabs tabs-lifted tabs-lg">
+        <div role="tablist" className="tabs tabs-lifted tabs-lg mb-2">
           <input
             type="radio"
             defaultChecked
@@ -199,7 +202,9 @@ const Home = () => {
             </div>
           </div>
         </div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

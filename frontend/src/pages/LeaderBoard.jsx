@@ -5,6 +5,7 @@ import { setLoading } from "../reducers/loaderReducer";
 import { showToast } from "../reducers/toastReducer";
 import { setLeaderboard } from "../reducers/leaderBoardReducer";
 import { clsx } from "clsx";
+import Footer from "../components/Footer";
 
 function LeaderBoard() {
   const controller = new AbortController();
@@ -62,8 +63,8 @@ function LeaderBoard() {
   }
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="flex justify-center items-center w-full md:w-3/4 xl:w-1/2 flex-col">
+    <div className="flex flex-col justify-between items-center min-h-screen">
+      <div className="flex flex-grow justify-start items-center w-full md:w-3/4 xl:w-1/2 flex-col mb-2">
         <div className="flex w-[75%] justify-between items-end font-bold my-4 text-sm sm:text-xl md:text-2xl ">
           <p className="font-bold">
             Top Habbit Hackers:
@@ -217,6 +218,9 @@ function LeaderBoard() {
           </div>
         )}
       </div>
+
+      <Footer></Footer>
+
     </div>
   );
 }
