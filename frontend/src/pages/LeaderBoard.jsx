@@ -54,16 +54,14 @@ function LeaderBoard() {
 
   //console.log(leaderboard)
 
-  if (isLoading) {
-    return (
-      <div className="flex h-full w-full justify-center items-start bg-gray-800/70 z-10">
-        <span className="loading text-gray-200 loading-spinner loading-lg mt-16"></span>
-      </div>
-    );
-  }
 
   return (
-    <div className="flex flex-col justify-between items-center min-h-screen">
+    <div className="flex flex-col items-center min-h-screen">
+      {isLoading && (
+        <div className="fixed h-full w-full bg-gray-800/70 z-10 text-center">
+          <span className="loading text-gray-200 loading-spinner loading-lg mt-16"></span>
+        </div>
+      )}
       <div className="flex flex-grow justify-start items-center w-full md:w-3/4 xl:w-1/2 flex-col mb-2">
         <div className="flex w-[75%] justify-between items-end font-bold my-4 text-sm sm:text-xl md:text-2xl ">
           <p className="font-bold">

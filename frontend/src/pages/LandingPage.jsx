@@ -94,10 +94,10 @@ function LandingPage() {
           </div>
         </>
       )}
-      <div className="flex flex-grow">
-
+      <div className="flex w-full items-end flex-grow">
+        <Footer></Footer>
       </div>
-      <Footer></Footer>
+      
     </div>
   );
 }
