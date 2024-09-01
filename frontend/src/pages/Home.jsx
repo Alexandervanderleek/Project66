@@ -6,7 +6,6 @@ import Habbit from "../components/Habbit";
 import { addHabbit, setHabbits } from "../reducers/habbitsReducer";
 import { showToast } from "../reducers/toastReducer";
 import { setLoading } from "../reducers/loaderReducer";
-import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
 const Home = () => {
@@ -93,10 +92,10 @@ const Home = () => {
   return (
     <div className="flex flex-col min-h-screen">
     {isLoading && (
-      <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
-        <span className="loading loading-spinner loading-lg text-gray-200"></span>
-      </div>
-    )}
+        <div className="fixed h-full w-full bg-gray-800/70 z-10 text-center">
+          <span className="loading text-gray-200 loading-spinner loading-lg mt-16"></span>
+        </div>
+      )}
     <div className="flex-grow flex flex-col items-center">
       <div className="w-full md:w-3/4 xl:w-1/2 flex flex-col flex-grow">
         <div className="flex justify-between p-3 items-center">
