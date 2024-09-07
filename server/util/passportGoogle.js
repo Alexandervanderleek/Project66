@@ -10,7 +10,7 @@ passport.use(
         clientSecret: GOOGLE_SECRET,
         callbackURL: GOOGLE_REDIRECT,
         scope: ['profile','email'],
-        state: true,
+        //state: true,
         passReqToCallback: true,
     },  async function (req, accessToken,refreshToken, profile, cb){
        
@@ -20,6 +20,8 @@ passport.use(
         const emailVerified = emails[0].verified;
         const fullName = displayName;
         const profilePic = photos[0].value;
+        
+        //console.log(email)
 
         //ensure email verififed
         if(emailVerified){
@@ -40,6 +42,7 @@ passport.use(
                     return cb(null, user.toJSON());
                 }
            }catch(err){
+                console.log(err)
                 return cb(new InternalError("Couldn't create the account"));
            }
         }else{
@@ -52,6 +55,7 @@ passport.use(
 //called before session created, and defines what goes in the session
 passport.serializeUser((req, user, cb) => {
     try{
+        //console.log(user)
         //console.log(user)
         process.nextTick(()=>{
             cb(null, {

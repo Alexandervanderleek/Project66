@@ -20,12 +20,12 @@ const sesh = session({
    saveUninitialized: false,
    secret: SESSION_SECRET,
    rolling: true,
+   proxy: true,
    cookie: {
-    secure: NODE_ENV === 'production',
+    secure: true,
     sameSite: 'lax',
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
-    //domain: 'localhost'
    }
  });
 

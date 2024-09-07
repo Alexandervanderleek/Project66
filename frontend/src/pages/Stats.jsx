@@ -117,7 +117,7 @@ function Stats() {
             <div className="flex justify-between p-3 items-center">
               <h1 className="font-bold text-2xl">Your Stats</h1>
               <button
-                className="btn"
+                className="btn bg-gray-300"
                 onClick={() => document.getElementById(10).showModal()}
               >
                 <svg

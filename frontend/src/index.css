@@ -9,16 +9,7 @@ html, body, #root {
   overscroll-behavior-y: none;
   margin: 0;
   padding: 0;
-  background-image: repeating-linear-gradient(
-      45deg,
-      #f5f6f7,
-      #f5f6f7 10px,
-      #ffffff 10px,
-      #ffffff 20px
-    );
-  /* background-color: #f5f6f7; */
-  background-size: cover;
-  background-attachment: fixed;
+  background-color: #F3F4F6;
 }
 
 
@@ -48,18 +39,6 @@ html, body, #root {
     animation: fadeOut 0.5s ease-out forwards;
   }
 
-  .diagonal-stripes {
-    background-image: repeating-linear-gradient(
-      45deg,
-      #f5f6f7,
-      #f5f6f7 10px,
-      #ffffff 10px,
-      #ffffff 20px
-    );
-    background-size: cover;
-    min-height: 100%;
-    background-attachment: fixed;
-  }
 
 
   @keyframes delete {

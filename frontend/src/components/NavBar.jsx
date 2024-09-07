@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUser, destroyUser } from "../reducers/userReducer";
 import { clearHabbits } from "../reducers/habbitsReducer";
 import { setLoading } from "../reducers/loaderReducer";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import {showToast} from '../reducers/toastReducer';
+import { useNavigate } from "react-router-dom";
 
 //Navbar component
 function NavBar() {
@@ -15,6 +16,7 @@ function NavBar() {
   const isLoading = useSelector((state) => state.loading.isLoading);
   const controller = new AbortController();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //function to handle login
   const handleLogin = () => {
@@ -26,18 +28,21 @@ function NavBar() {
     //   `width=500,height=600`
     // );
     //"/oauth2/login/google",
-    const popup = window.open(
-      "/oauth2/login/google",
-      "popup",
-      `width=500,height=600`
-    );
+    // const popup = window.open(
+    //   "http://localhost:3000/oauth2/login/google",
+    //   "popup",
+    //   `width=500,height=600`
+    // );
 
-    //check for success or failure redirect
-    let interval = setInterval(() => {
-      if (!popup.closed) return;
-      getAuthUser();
-      return clearInterval(interval);
-    }, 500);
+    // //check for success or failure redirect
+    // let interval = setInterval(() => {
+    //   if (!popup.closed) return;
+    //   getAuthUser();
+    //   return clearInterval(interval);
+    // }, 500);
+    // Simulate a mouse click:
+    window.location.href = "http://localhost:3000/oauth2/login/google";
+
   };
 
   //function clear store on signout's

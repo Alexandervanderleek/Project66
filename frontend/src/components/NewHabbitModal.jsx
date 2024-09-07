@@ -50,7 +50,7 @@ function NewHabbitModal({ createNewHabbit }) {
 
   return (
     <>
-      <button className="btn" onClick={newHabbitOpen}>
+      <button className="btn bg-gray-300 " onClick={newHabbitOpen}>
         New
       </button>
       <dialog

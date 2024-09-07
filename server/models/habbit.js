@@ -58,7 +58,7 @@ habbitSchema.virtual('today').get(function(){
     const now = new Date();
     var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(),
     now.getUTCDate(), now.getUTCHours(),
-    now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+    now.getUTCMinutes(), now.getUTCSeconds()+2, now.getUTCMilliseconds());
 
     const myDate = new Date(now_utc);
 

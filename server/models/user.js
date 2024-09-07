@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const habbit = require('./habbit');
+const Habbit = require('./habbit');
 
 const Schema = mongoose.Schema;
 

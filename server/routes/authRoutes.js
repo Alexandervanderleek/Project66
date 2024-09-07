@@ -7,8 +7,10 @@ authRouter.get('/login/google', passport.authenticate("google"));
 
 //redirect google auth
 authRouter.get('/redirect/google',passport.authenticate("google",{
-    successReturnToOrRedirect: NODE_ENV==="production"? '/redirect/1':'http://localhost:5173/redirect/1',
+    //session: false,
+    successReturnToOrRedirect: '/',
     failureRedirect: '/redirect/2',
+    failureMessage: true
 }));
 
 module.exports = authRouter;

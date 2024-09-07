@@ -12,12 +12,14 @@ const userRouter = require('./routes/userRoutes');
 const habbitRouter = require('./routes/habbitRoutes');
 const path = require('path')
 const rateLimit =  require('express-rate-limit');
-
+//
 const app = express();
+
+app.set('trust proxy', 1); // trust first proxy    
 
 const limit = rateLimit({
     windowMs: 10 * 60 * 1000,
-    max: 75,
+    max: 100,
 })
 
 app.use(limit);
@@ -29,9 +31,6 @@ app.use(cors({
     credentials: true
 }));
 
-if (NODE_ENV === 'production') {
-    app.set('trust proxy', 1); // trust first proxy
-}
 
 //parse json
 app.use(express.json());

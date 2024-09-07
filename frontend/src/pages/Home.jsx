@@ -182,9 +182,6 @@ const Home = () => {
               habbits.filter((habbit) => habbit.status !== "active").length >
                 0 ? (
                 <div className="flex flex-col my-4 w-full md:w-3/4 mx-2">
-                  <h1 className="font-semibold m-2 text-lg">
-                    Recent Activity:
-                  </h1>
                   {habbits
                     .filter((habbit) => habbit.status !== "active")
                     .map((habbit, index) => (
