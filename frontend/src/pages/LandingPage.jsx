@@ -42,7 +42,7 @@ function LandingPage() {
               <img
                 className="drop-shadow-lg border-2 border-black rounded-lg"
                 width={550}
-                src="Track.PNG"
+                src="Track.webp"
               ></img>
               <div className="hidden lg:block absolute -bottom-50 right-0">
                 <svg
@@ -64,7 +64,7 @@ function LandingPage() {
                 className="drop-shadow-lg border-2 border-black rounded-lg"
                 width={550}
                 height={400}
-                src="Reflect.PNG"
+                src="Reflect.webp"
               ></img>
               <div className="hidden lg:block  absolute -bottom-50 right-10">
                 <svg
@@ -88,7 +88,7 @@ function LandingPage() {
                 className="drop-shadow-lg border-2 border-black rounded-lg"
                 width={550}
                 height={400}
-                src="Stats.PNG"
+                src="Stats.webp"
               ></img>
             </div>
           </div>

@@ -12,18 +12,23 @@ const userRouter = require('./routes/userRoutes');
 const habbitRouter = require('./routes/habbitRoutes');
 const path = require('path')
 const rateLimit =  require('express-rate-limit');
+const expressStaticGzip = require('express-static-gzip');
+
 //
 const app = express();
 
 app.set('trust proxy', 1); // trust first proxy    
 
 const limit = rateLimit({
-    windowMs: 10 * 60 * 1000,
+    windowMs: 5 * 60 * 1000,
     max: 100,
 })
 
 app.use(limit);
-app.use(express.static('dist'))
+
+app.use(expressStaticGzip(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname,'dist')))
+
 
 //just cors
 app.use(cors({
